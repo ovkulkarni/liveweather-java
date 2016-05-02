@@ -22,16 +22,16 @@ public class Weather{
       JSONObject results = getJSONFromURL("http://autocomplete.wunderground.com/aq?query=" + URLEncoder.encode(query) + "&h=0&c=US");
       return results.getJSONArray("RESULTS").getJSONObject(0).getString("name");
    }
-   
+
    public static String getEnding(String query) throws Exception {
       JSONObject results = getJSONFromURL("http://autocomplete.wunderground.com/aq?query=" + URLEncoder.encode(query) + "&h=0&c=US");
       return results.getJSONArray("RESULTS").getJSONObject(0).getString("l");
    }
-   
+
    public static JSONObject getCurrentResults(String query) throws Exception{
        return getJSONFromURL("http://api.wunderground.com/api/ccb47836f398476f/conditions" + getEnding(query) + ".json");
    }
-   
+
    public static JSONObject getCurrentConditions(String query) throws Exception{
        return getCurrentResults(query).getJSONObject("current_observation");
    }
@@ -39,7 +39,7 @@ public class Weather{
    public static String getTemperature(JSONObject data){
         return data.getString("temperature_string");
    }
-    
+
    public static String getImageURL(JSONObject data){
         return data.getString("icon_url");
     }
