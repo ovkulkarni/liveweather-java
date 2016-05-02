@@ -28,12 +28,12 @@ public class Weather{
       return results.getJSONArray("RESULTS").getJSONObject(0).getString("l");
    }
    
-   public static JSONObject getResults(String query) throws Exception{
+   public static JSONObject getCurrentResults(String query) throws Exception{
        return getJSONFromURL("http://api.wunderground.com/api/ccb47836f398476f/conditions" + getEnding(query) + ".json");
    }
    
    public static JSONObject getCurrentConditions(String query) throws Exception{
-       return getResults(query).getJSONObject("current_observation");
+       return getCurrentResults(query).getJSONObject("current_observation");
    }
 
    public static String getTemperature(JSONObject data){
@@ -56,12 +56,20 @@ public class Weather{
         return data.getString("forecast_url");
     }
 
-    public static String getObservationTime(JSONObject data){
+    public static String getTimeAndDate(JSONObject data){
         return data.getString("local_time_rfc822");
     }
 
     public static String getWindConditions(JSONObject data){
         return data.getString("wind_string");
+    }
+
+    public static String getHumidity(JSONObject data){
+        return data.getString("relative_humidity");
+    }
+
+    public static String getActualTemp(JSONObject data){
+        return data.getString("feelslike_string");
     }
 
 }
