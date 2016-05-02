@@ -10,7 +10,7 @@ public class Driver {
    /************************************************************* 
    * Runs the program
    **************************************************************/
-   public static void main(String[] args){
+   public static void main(String[] args) throws Exception{
       JFrame frame = new JFrame("Live Weather");
       frame.setSize(560,540);
       frame.setLocation(400,100);
