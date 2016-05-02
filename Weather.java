@@ -32,12 +32,36 @@ public class Weather{
        return getJSONFromURL("http://api.wunderground.com/api/ccb47836f398476f/conditions" + getEnding(query) + ".json");
    }
    
-   public static String currentConditions(JSONObject data){
-        return data.getJSONObject("current_observation").getString("temperature_string");
+   public static JSONObject getCurrentConditions(String query) throws Exception{
+       return getResults(query).getJSONObject("current_observation");
+   }
+
+   public static String getTemperature(JSONObject data){
+        return data.getString("temperature_string");
    }
     
    public static String getImageURL(JSONObject data){
         return data.getString("icon_url");
+    }
+
+   public static String getFullName(JSONObject data){
+       return data.getString("full");
+    }
+
+    public static String getCondition(JSONObject data){
+        return data.getString("weather");
+    }
+
+    public static String getDetailedURL(JSONObject data){
+        return data.getString("forecast_url");
+    }
+
+    public static String getObservationTime(JSONObject data){
+        return data.getString("local_time_rfc822");
+    }
+
+    public static String getWindConditions(JSONObject data){
+        return data.getString("wind_string");
     }
 
 }
