@@ -10,8 +10,7 @@ public class Panel extends JPanel
    public Panel()
    {
       try{
-         JLabel label = addImage();
-         add(label);
+         addImage(this);
       }
       catch(Exception e){
          JLabel label = new JLabel("Hi");
@@ -20,12 +19,12 @@ public class Panel extends JPanel
       
    }
    
-   public JLabel addImage() throws Exception{
+   public void addImage(JPanel p) throws Exception{
       JSONObject data = Weather.getCurrentConditions("Washington");
       URL url = new URL(Weather.getImageURL(data));
       BufferedImage image = ImageIO.read(url);
       JLabel label = new JLabel(new ImageIcon(image));
-      return label;
+      p.add(label);
    }
       
       
