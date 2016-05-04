@@ -5,9 +5,7 @@ JC = javac
 	$(JC) $(JFLAGS) $*.java
 
 CLASSES = \
-	Weather.java\
-	Driver.java\
-	CurrentPanel.java
+		  *.java
 
 default: classes
 
