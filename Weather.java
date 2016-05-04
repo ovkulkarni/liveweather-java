@@ -45,7 +45,7 @@ public class Weather{
     }
 
    public static String getFullName(JSONObject data){
-       return data.getString("full");
+       return data.getJSONObject("display_location").getString("full");
     }
 
     public static String getCondition(JSONObject data){
