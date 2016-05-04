@@ -7,7 +7,7 @@ JC = javac
 CLASSES = \
 	Weather.java\
 	Driver.java\
-	Panel.java
+	CurrentPanel.java
 
 default: classes
 

@@ -5,9 +5,9 @@ import javax.imageio.ImageIO;
 import org.json.*;
 import java.net.*;
 
-public class Panel extends JPanel
+public class CurrentPanel extends JPanel
 {
-   public Panel()
+   public CurrentPanel()
    {
       try{
          addImage(this);
