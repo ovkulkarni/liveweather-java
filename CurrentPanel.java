@@ -49,7 +49,7 @@ public class CurrentPanel extends JPanel
       p.add(label);
    }
    public void addTemp(JPanel p) throws Exception{
-      JLabel label = new JLabel("Temperature: " + Weather.getTemperature(current) + "\nFeels Like: " + Weather.getActualTemp(current));
+      JLabel label = new JLabel("Temperature: " + Weather.getTemperature(current) + "                   Feels Like: " + Weather.getActualTemp(current));
       p.add(label);
    }
    public void addLocation(JPanel p) throws Exception{
