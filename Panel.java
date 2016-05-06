@@ -4,18 +4,19 @@ import java.awt.*;
 import javax.imageio.ImageIO;
 import org.json.*;
 import java.net.*;
+import javax.swing.border.*;
 public class Panel extends JPanel
 {
-
-    private CurrentPanel current;
-    private AlertsPanel alerts;
-    private TenDayPanel tenDay;
-    private DayPanel day;
-    private SearchPanel search;
+   private CurrentPanel current;
+   private AlertsPanel alerts;
+   private TenDayPanel tenDay;
+   private DayPanel day;
+   private SearchPanel search;
    public Panel()
    {
       setLayout(new BorderLayout());
       current = new CurrentPanel();
+      current.setBorder(getOurBorder());
       add(current, BorderLayout.NORTH);
       JPanel right = new JPanel();
       day = new DayPanel();
@@ -28,5 +29,8 @@ public class Panel extends JPanel
       add(right, BorderLayout.EAST);
       tenDay = new TenDayPanel();
       add(tenDay,BorderLayout.SOUTH);
+   }
+   public Border getOurBorder(){
+      return BorderFactory.createMatteBorder(5,1,1,1,new Color(128,128,255));
    }
 }
