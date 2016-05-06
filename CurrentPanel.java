@@ -19,7 +19,7 @@ public class CurrentPanel extends JPanel
    public CurrentPanel()
    {
       try{
-         setLayout(new GridLayout(5, 0));
+         setLayout(new GridLayout(6, 0));
          addLocation(this);
          addImage(this);
          addDate(this);
@@ -28,7 +28,7 @@ public class CurrentPanel extends JPanel
          
       }
       catch(Exception e){
-         System.out.println(e);
+         System.out.println(e);ninstall
       }
       
    }
@@ -49,8 +49,10 @@ public class CurrentPanel extends JPanel
       p.add(label);
    }
    public void addTemp(JPanel p) throws Exception{
-      JLabel label = new JLabel("Temperature: " + Weather.getTemperature(current) + "                   Feels Like: " + Weather.getActualTemp(current));
+      JLabel label = new JLabel("Temperature: " + Weather.getTemperature(current));
+      JLabel label2 = new JLabel("Feels Like: " + Weather.getActualTemp(current));
       p.add(label);
+       p.add(label2);
    }
    public void addLocation(JPanel p) throws Exception{
       JLabel label = new JLabel(Weather.getFullName(current));
