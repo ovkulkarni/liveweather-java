@@ -28,7 +28,7 @@ public class CurrentPanel extends JPanel
          
       }
       catch(Exception e){
-         System.out.println(e);ninstall
+         System.out.println(e);
       }
       
    }
