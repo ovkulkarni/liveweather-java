@@ -8,4 +8,6 @@ public class AlertsPanel extends JPanel
 
 {
       public AlertsPanel(){
-      
+      }
+}
+

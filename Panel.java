@@ -4,13 +4,14 @@ import java.awt.*;
 import javax.imageio.ImageIO;
 import org.json.*;
 import java.net.*;
-CurrentPanel current;
-AlertsPanel alerts;
-TenDayPanel tenDay;
-DayPanel day;
-SearchPanel search;
 public class Panel extends JPanel
 {
+
+    private CurrentPanel current;
+    private AlertsPanel alerts;
+    private TenDayPanel tenDay;
+    private DayPanel day;
+    private SearchPanel search;
    public Panel()
    {
       setLayout(new BorderLayout());
