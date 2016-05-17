@@ -1,3 +1,10 @@
+/*****************************************************************
+* The Weather class has all the methods to retrieve the weather 
+* from the API. This includes all current and future weather 
+* conditions.
+* 
+* Omkar Kulkarni
+****************************************************************/
 import java.net.*;
 import java.io.*;
 import org.json.*;
