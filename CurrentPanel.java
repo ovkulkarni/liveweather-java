@@ -1,9 +1,3 @@
-import javax.swing.*;
-import java.awt.image.*;
-import java.awt.*;
-import javax.imageio.ImageIO;
-import org.json.*;
-import java.net.*;
 /*****************************************************************
 * The CurrentPanel is a JPanel that displays basic weather
 * information, such as time and current condition. CurrentPanel
@@ -16,6 +10,12 @@ import java.net.*;
 *
 * Kiran Ganeshan
 ****************************************************************/
+import javax.swing.*;
+import java.awt.image.*;
+import java.awt.*;
+import javax.imageio.ImageIO;
+import org.json.*;
+import java.net.*;
 public class CurrentPanel extends JPanel
 { 
    private static JSONObject current;
