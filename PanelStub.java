@@ -25,30 +25,11 @@ public class Panel extends JPanel
    /************************************************************* 
    * Constructs a Panel
    **************************************************************/
-   public Panel()
-   {
-      setLayout(new BorderLayout());
-      current = new CurrentPanel();
-      current.setBorder(getOurBorder());
-      add(current, BorderLayout.NORTH);
-      JPanel right = new JPanel();
-      day = new DayPanel();
-      alerts = new AlertsPanel();
-      search = new SearchPanel();
-      right.setLayout(new GridLayout(3,1));
-      right.add(search);
-      right.add(day);
-      right.add(alerts);
-      add(right, BorderLayout.EAST);
-      tenDay = new TenDayPanel();
-      add(tenDay,BorderLayout.SOUTH);
-   }
+   public Panel() {}
    /************************************************************* 
    * Returns the standardized border used for each subpanel of
    * the Panel
    * @return  border
    **************************************************************/
-   public Border getOurBorder(){
-      return BorderFactory.createMatteBorder(5,1,1,1,new Color(128,128,255));
-   }
+   public Border getOurBorder() {}
 }
