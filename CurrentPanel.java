@@ -41,7 +41,7 @@ public class CurrentPanel extends JPanel
       try{
          setLayout(new GridLayout(6, 0));
          addLocation(this, sample);
-         addImage(this, sample);
+         addImage(this);
          addDate(this, sample);
          addCondition(this, sample);
          addTemp(this, sample);
@@ -57,17 +57,17 @@ public class CurrentPanel extends JPanel
    * 
    * @param p  A Panel to add the image to ("this")
    **************************************************************/
-   public void addImage(JPanel p, Font f) throws Exception{
+   public void addImage(JPanel p) throws Exception{
       URL url = new URL(Weather.getImageURL(current));
       BufferedImage image = ImageIO.read(url);
       JLabel label = new JLabel(new ImageIcon(image));
-      label.setFont(f);
       p.add(label);
    }
    /************************************************************* 
    * Adds a label showing the time and date to a JPanel.
    * 
    * @param p  A Panel to add the label to ("this")
+   * @param f  A font with which to display the label
    **************************************************************/
    public void addDate(JPanel p, Font f) throws Exception{
       JLabel label = new JLabel(Weather.getTimeAndDate(current));
@@ -86,6 +86,7 @@ public class CurrentPanel extends JPanel
    * to a JPanel.
    * 
    * @param p  A Panel to add the label to ("this")
+   * @param f  A font with which to display the label
    **************************************************************/
    public void addCondition(JPanel p, Font f) throws Exception{
       JLabel label = new JLabel(Weather.getCondition(current));
@@ -93,16 +94,22 @@ public class CurrentPanel extends JPanel
       p.add(label);
    }
    /************************************************************* 
-   * Adds two labels showing the current temperature and the
-   * "feels like" temperature to a JPanel.
+   * Adds a label showing the current temperature to a JPanel.
    * 
-   * @param p  A Panel to add the labels to ("this")
+   * @param p  A Panel to add the label to ("this")
+   * @param f  A font with which to display the label
    **************************************************************/
    public void addTemp(JPanel p, Font f) throws Exception{
       JLabel label = new JLabel("Temperature: " + Weather.getTemperature(current));
       label.setFont(f);
       p.add(label);
    }
+   /************************************************************* 
+   * Adds a label showing the "feels like" temperature to a JPanel.
+   * 
+   * @param p  A Panel to add the label to ("this")
+   * @param f  A font with which to display the label
+   **************************************************************/
    public void addFeelsLike(JPanel p, Font f) throws Exception{
       JLabel label = new JLabel("Feels Like: " + Weather.getActualTemp(current));
       label.setFont(f);
@@ -113,6 +120,7 @@ public class CurrentPanel extends JPanel
    * API is showing weather to a JPanel
    * 
    * @param p  A Panel to add the label to ("this")
+   * @param f  A font with which to display the label
    **************************************************************/
    public void addLocation(JPanel p, Font f) throws Exception{
       JLabel label = new JLabel(Weather.getFullName(current));
