@@ -32,35 +32,46 @@ public class CurrentPanel extends JPanel
    * Adds an image depicting the current conditions to a JPanel.
    * 
    * @param p  A Panel to add the image to ("this")
+   * @param f  A font with which to display the label
    **************************************************************/
-   public void addImage(JPanel p) throws Exception{}
+   public void addImage(JPanel p, Font f) throws Exception{}
    /************************************************************* 
    * Adds a label showing the time and date to a JPanel.
    * 
    * @param p  A Panel to add the label to ("this")
+   * @param f  A font with which to display the label
    **************************************************************/
-   public void addDate(JPanel p) throws Exception{}
+   public void addDate(JPanel p, Font f) throws Exception{}
    /************************************************************* 
    * Adds a label showing a description of the current conditions
    * to a JPanel.
    * 
    * @param p  A Panel to add the label to ("this")
+   * @param f  A font with which to display the label
    **************************************************************/
-   public void addCondition(JPanel p) throws Exception{}
+   public void addCondition(JPanel p, Font f) throws Exception{}
    /************************************************************* 
-   * Adds two labels showing the current temperature and the
-   * "feels like" temperature to a JPanel.
+   * Adds a label showing the current temperature to a JPanel.
    * 
-   * @param p  A Panel to add the labels to ("this")
+   * @param p  A Panel to add the label to ("this")
+   * @param f  A font with which to display the label
    **************************************************************/
-   public void addTemp(JPanel p) throws Exception{}
+   public void addTemp(JPanel p, Font f) throws Exception{}
+   /************************************************************* 
+   * Adds a label showing the "feels like" temperature to a JPanel.
+   * 
+   * @param p  A Panel to add the label to ("this")
+   * @param f  A font with which to display the label
+   **************************************************************/
+   public void addFeelsLike(JPanel p, Font f) throws Exception{}
    /************************************************************* 
    * Adds a label showing the location from which the Wunderground
    * API is showing weather to a JPanel
    * 
    * @param p  A Panel to add the label to ("this")
+   * @param f  A font with which to display the label
    **************************************************************/
-   public void addLocation(JPanel p) throws Exception{}
+   public void addLocation(JPanel p, Font f) throws Exception{}
    /************************************************************* 
    * Formats the weekday text received form Wunderground API
    * 
