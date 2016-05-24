@@ -23,9 +23,10 @@ public class CurrentPanel extends JPanel
    * Instantiates the JSONObject required to retain information
    * from the Wunderground API
    **************************************************************/
-   static{}
+   public void update(){}
    /************************************************************* 
-   * Instantiates the CurrentPanel object
+   * Instantiates the CurrentPanel object, and then updates each
+   * five seconds.
    **************************************************************/
    public CurrentPanel(){}
    /************************************************************* 
