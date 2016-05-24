@@ -61,4 +61,18 @@ public class CurrentPanel extends JPanel
    * @param p  A Panel to add the label to ("this")
    **************************************************************/
    public void addLocation(JPanel p) throws Exception{}
+   /************************************************************* 
+   * Formats the weekday text received form Wunderground API
+   * 
+   * @param wd  The weekday string given by Wunderground API
+   * @return    The formatted weekday
+   **************************************************************/
+   public String formatWeekday(String wd){}
+   /************************************************************* 
+   * Formats the date and time text received form Wunderground API
+   * 
+   * @param date  The date and time string given by Wunderground API
+   * @return      The formatted date
+   **************************************************************/
+   public String formatDate(String date){}
 }
