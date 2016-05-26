@@ -24,12 +24,20 @@ public class CurrentPanel extends JPanel
    * Instantiates the JSONObject required to retain information
    * from the Wunderground API
    **************************************************************/
-   static{
+   public void update(JPanel p, Font sample){
       try{
          current = Weather.getCurrentConditions("Washington");
+         p.setLayout(new GridLayout(6, 0));
+         addLocation(p, sample);
+         addImage(p);
+         addDate(p, sample);
+         addCondition(p, sample);
+         addTemp(p, sample);
+         addFeelsLike(p, sample);
       }
       catch(Exception e){
          current = new JSONObject();
+         System.out.println(e);
       }
    }
    /************************************************************* 
@@ -38,18 +46,14 @@ public class CurrentPanel extends JPanel
    public CurrentPanel()
    {
       Font sample = new Font("Serif", Font.PLAIN, 20);
-      try{
-         setLayout(new GridLayout(6, 0));
-         addLocation(this, sample);
-         addImage(this);
-         addDate(this, sample);
-         addCondition(this, sample);
-         addTemp(this, sample);
-         addFeelsLike(this, sample);
-      }
-      catch(Exception e){
-         System.out.println(e);
-      }
+      //while(true){
+         try{
+               update(this, sample);
+            }
+         catch(Exception e){
+               System.out.println(e);
+            }
+        //}
       
    }
    /************************************************************* 
@@ -135,13 +139,20 @@ public class CurrentPanel extends JPanel
    **************************************************************/
    public String formatWeekday(String wd){
       switch(wd){
-         case "Mon":wd="Monday";break;
-         case "Tue":wd="Tuesday";break;
-         case "Wed":wd="Wednesday";break;
-         case "Thu":wd="Thursday";break;
-         case "Fri":wd="Friday";break;
-         case "Sat":wd="Saturday";break;
-         case "Sun":wd="Sunday";break;
+         case "Mon":wd="Monday";
+            break;
+         case "Tue":wd="Tuesday";
+            break;
+         case "Wed":wd="Wednesday";
+            break;
+         case "Thu":wd="Thursday";
+            break;
+         case "Fri":wd="Friday";
+            break;
+         case "Sat":wd="Saturday";
+            break;
+         case "Sun":wd="Sunday";
+            break;
       }
       return wd;
    }
