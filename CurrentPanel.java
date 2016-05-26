@@ -24,7 +24,7 @@ public class CurrentPanel extends JPanel
    * Instantiates the JSONObject required to retain information
    * from the Wunderground API
    **************************************************************/
-   public void update(JPanel p, Font sample){
+   public void update(JPanel p, Font sample) throws Exception{
       try{
          current = Weather.getCurrentConditions("Washington");
          p.setLayout(new GridLayout(6, 0));
@@ -43,18 +43,11 @@ public class CurrentPanel extends JPanel
    /************************************************************* 
    * Instantiates the CurrentPanel object
    **************************************************************/
-   public CurrentPanel()
+   public CurrentPanel() throws Exception
    {
       Font sample = new Font("Serif", Font.PLAIN, 20);
-      //while(true){
-         try{
-               update(this, sample);
-            }
-         catch(Exception e){
-               System.out.println(e);
-            }
-        //}
-      
+      update(this, sample);
+      Thread.sleep(5000);
    }
    /************************************************************* 
    * Adds an image depicting the current conditions to a JPanel.
