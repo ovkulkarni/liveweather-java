@@ -16,10 +16,12 @@ import java.awt.*;
 import javax.imageio.ImageIO;
 import org.json.*;
 import java.net.*;
+import java.awt.event.*;
 public class CurrentPanel extends JPanel
 { 
+   private Font sample;
    private static JSONObject current;
-   
+   private JButton updateButton;
    /************************************************************* 
    * Instantiates the JSONObject required to retain information
    * from the Wunderground API
@@ -34,6 +36,7 @@ public class CurrentPanel extends JPanel
          addCondition(p, sample);
          addTemp(p, sample);
          addFeelsLike(p, sample);
+         addUpdateButton(p);
       }
       catch(Exception e){
          current = new JSONObject();
@@ -45,7 +48,7 @@ public class CurrentPanel extends JPanel
    **************************************************************/
    public CurrentPanel() throws Exception
    {
-      Font sample = new Font("Serif", Font.PLAIN, 20);
+      sample = new Font("Serif", Font.PLAIN, 20);
       update(this, sample);
       Thread.sleep(5000);
    }
@@ -128,6 +131,11 @@ public class CurrentPanel extends JPanel
       label.setFont(f);
       p.add(label);
    }
+   public void addUpdateButton(JPanel p) throws Exception{
+      updateButton = new JButton("Update");
+      updateButton.addActionListener(new UpdateListener());
+      p.add(updateButton);
+   }
    /************************************************************* 
    * Formats the weekday text received form Wunderground API
    * 
@@ -171,5 +179,12 @@ public class CurrentPanel extends JPanel
       date = date.substring(date.indexOf(" ")+1,date.length());
       String year = date;
       return month + " " + day + ", " + year;
+   }
+   private class UpdateListener implements ActionListener
+   {
+      public void actionPerformed(ActionEvent e)
+      {
+         update(this,sample);
+      }
    }
 }
