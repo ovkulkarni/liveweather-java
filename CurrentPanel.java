@@ -124,6 +124,9 @@ public class CurrentPanel extends JPanel
       label.setFont(f);
       add(label);
    }
+   /************************************************************* 
+   * Adds the update button to the CurrentPanel
+   **************************************************************/
    public void addUpdateButton() throws Exception{
       updateButton = new JButton("Update");
       updateButton.addActionListener(new UpdateListener());
@@ -173,8 +176,23 @@ public class CurrentPanel extends JPanel
       String year = date;
       return month + " " + day + ", " + year;
    }
+   /*****************************************************************
+   * The UpdateListener is a private class of CurrentPanel that 
+   * implements the ActionListener interface. It is responsible for
+   * handling the response to the update button being pressed.
+   *
+   * Kiran Ganeshan
+   ****************************************************************/
    private class UpdateListener implements ActionListener
    {
+      /************************************************************* 
+      * Responds to any presses of the update button by updating
+      * the CurrentPanel
+      * 
+      * @param e  The ActionEvent to which the UpdateListener is
+      *           responding
+      **************************************************************/
+
       public void actionPerformed(ActionEvent e)
       {
          try{update(sample);}
