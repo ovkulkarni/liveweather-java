@@ -104,7 +104,9 @@ public class CurrentPanel extends JPanel
    * @param f  A font with which to display the label
    **************************************************************/
    public void addTemp(JPanel p, Font f) throws Exception{
-      JLabel label = new JLabel("Temperature: " + Weather.getTemperature(current));
+      String temp = Weather.getTemperature(current);
+      temp = temp.substring(0,temp.indexOf("("));
+      JLabel label = new JLabel("Temperature: " + temp);
       label.setFont(f);
       p.add(label);
    }
@@ -115,7 +117,9 @@ public class CurrentPanel extends JPanel
    * @param f  A font with which to display the label
    **************************************************************/
    public void addFeelsLike(JPanel p, Font f) throws Exception{
-      JLabel label = new JLabel("Feels Like: " + Weather.getActualTemp(current));
+      String temp = Weather.getActualTemp(current);
+      temp = temp.substring(0,temp.indexOf("("));
+      JLabel label = new JLabel("Feels like: " + temp);
       label.setFont(f);
       p.add(label);
    }
