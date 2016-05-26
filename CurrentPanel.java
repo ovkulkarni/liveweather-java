@@ -1,5 +1,5 @@
 /*****************************************************************
-* The CurrentPanel is a JPanel that displays basic weather
+* The CurrentPanel is CurrentPanel that displays basic weather
 * information, such as time and current condition. CurrentPanel
 * has a JSONObject current, and it knows how to instantiate
 * that JSONObject with information retreived from the Wunderground 
@@ -26,17 +26,17 @@ public class CurrentPanel extends JPanel
    * Instantiates the JSONObject required to retain information
    * from the Wunderground API
    **************************************************************/
-   public void update(JPanel p, Font sample) throws Exception{
+   public void update(Font sample) throws Exception{
       try{
          current = Weather.getCurrentConditions("Washington");
-         p.setLayout(new GridLayout(6, 0));
-         addLocation(p, sample);
-         addImage(p);
-         addDate(p, sample);
-         addCondition(p, sample);
-         addTemp(p, sample);
-         addFeelsLike(p, sample);
-         addUpdateButton(p);
+         setLayout(new GridLayout(6, 0));
+         addLocation(sample);
+         addImage();
+         addDate(sample);
+         addCondition(sample);
+         addTemp(sample);
+         addFeelsLike(sample);
+         addUpdateButton();
       }
       catch(Exception e){
          current = new JSONObject();
@@ -49,27 +49,24 @@ public class CurrentPanel extends JPanel
    public CurrentPanel() throws Exception
    {
       sample = new Font("Serif", Font.PLAIN, 20);
-      update(this, sample);
+      update(sample);
       Thread.sleep(5000);
    }
    /************************************************************* 
-   * Adds an image depicting the current conditions to a JPanel.
-   * 
-   * @param p  A Panel to add the image to ("this")
+   * Adds an image depicting the current conditions to CurrentPanel.
    **************************************************************/
-   public void addImage(JPanel p) throws Exception{
+   public void addImage() throws Exception{
       URL url = new URL(Weather.getImageURL(current));
       BufferedImage image = ImageIO.read(url);
       JLabel label = new JLabel(new ImageIcon(image));
-      p.add(label);
+      add(label);
    }
    /************************************************************* 
-   * Adds a label showing the time and date to a JPanel.
+   * Adds a label showing the time and date to CurrentPanel.
    * 
-   * @param p  A Panel to add the label to ("this")
    * @param f  A font with which to display the label
    **************************************************************/
-   public void addDate(JPanel p, Font f) throws Exception{
+   public void addDate(Font f) throws Exception{
       JLabel label = new JLabel(Weather.getTimeAndDate(current));
       String unformat = label.getText();
       String wd = formatWeekday(unformat.substring(0,3));
@@ -79,68 +76,64 @@ public class CurrentPanel extends JPanel
       String finalText = wd + ", " + date;
       label.setText(finalText);
       label.setFont(f);
-      p.add(label);
+      add(label);
    }
    /************************************************************* 
    * Adds a label showing a description of the current conditions
-   * to a JPanel.
+   * to CurrentPanel.
    * 
-   * @param p  A Panel to add the label to ("this")
    * @param f  A font with which to display the label
    **************************************************************/
-   public void addCondition(JPanel p, Font f) throws Exception{
+   public void addCondition(Font f) throws Exception{
       JLabel label = new JLabel(Weather.getCondition(current));
       label.setFont(f);
-      p.add(label);
+      add(label);
    }
    /************************************************************* 
-   * Adds a label showing the current temperature to a JPanel.
+   * Adds a label showing the current temperature to CurrentPanel.
    * 
-   * @param p  A Panel to add the label to ("this")
    * @param f  A font with which to display the label
    **************************************************************/
-   public void addTemp(JPanel p, Font f) throws Exception{
+   public void addTemp(Font f) throws Exception{
       String temp = Weather.getTemperature(current);
       temp = temp.substring(0,temp.indexOf("("));
       JLabel label = new JLabel("Temperature: " + temp);
       label.setFont(f);
-      p.add(label);
+      add(label);
    }
    /************************************************************* 
-   * Adds a label showing the "feels like" temperature to a JPanel.
+   * Adds a label showing the "feels like" temperature to CurrentPanel.
    * 
-   * @param p  A Panel to add the label to ("this")
    * @param f  A font with which to display the label
    **************************************************************/
-   public void addFeelsLike(JPanel p, Font f) throws Exception{
+   public void addFeelsLike(Font f) throws Exception{
       String temp = Weather.getActualTemp(current);
       temp = temp.substring(0,temp.indexOf("("));
       JLabel label = new JLabel("Feels like: " + temp);
       label.setFont(f);
-      p.add(label);
+      add(label);
    }
    /************************************************************* 
    * Adds a label showing the location from which the Wunderground
-   * API is showing weather to a JPanel
+   * API is showing weather to CurrentPanel
    * 
-   * @param p  A Panel to add the label to ("this")
    * @param f  A font with which to display the label
    **************************************************************/
-   public void addLocation(JPanel p, Font f) throws Exception{
+   public void addLocation(Font f) throws Exception{
       JLabel label = new JLabel(Weather.getFullName(current));
       label.setFont(f);
-      p.add(label);
+      add(label);
    }
-   public void addUpdateButton(JPanel p) throws Exception{
+   public void addUpdateButton() throws Exception{
       updateButton = new JButton("Update");
       updateButton.addActionListener(new UpdateListener());
-      p.add(updateButton);
+      add(updateButton);
    }
    /************************************************************* 
    * Formats the weekday text received form Wunderground API
    * 
-   * @param p  The weekday string given by Wunderground API
-   * @return   The formatted weekday
+   * @param wd  The weekday string given by Wunderground API
+   * @return    The formatted weekday
    **************************************************************/
    public String formatWeekday(String wd){
       switch(wd){
@@ -164,8 +157,8 @@ public class CurrentPanel extends JPanel
    /************************************************************* 
    * Formats the date and time text received form Wunderground API
    * 
-   * @param p  The date and time string given by Wunderground API
-   * @return   The formatted date
+   * @param date  The date and time string given by Wunderground API
+   * @return      The formatted date
    **************************************************************/
    public String formatDate(String date){
       String day = date.substring(0,date.indexOf(" "));
@@ -184,7 +177,8 @@ public class CurrentPanel extends JPanel
    {
       public void actionPerformed(ActionEvent e)
       {
-         update(this,sample);
+         try{update(sample);}
+         catch(Exception a){System.out.println(a);}
       }
    }
 }
