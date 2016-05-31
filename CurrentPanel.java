@@ -26,17 +26,17 @@ public class CurrentPanel extends JPanel
    * Instantiates the JSONObject required to retain information
    * from the Wunderground API
    **************************************************************/
-   public void update(Font sample) throws Exception{
+   public void update(Font sample,JPanel p) throws Exception{
       try{
          current = Weather.getCurrentConditions("Washington");
-         setLayout(new GridLayout(6, 0));
-         addLocation(sample,this);
-         addImage(this);
-         addDate(sample,this);
-         addCondition(sample,this);
-         addTemp(sample,this);
-         addFeelsLike(sample,this);
-         addUpdateButton(this);
+         p.setLayout(new GridLayout(7, 0));
+         addLocation(sample,p);
+         addImage(p);
+         addDate(sample,p);
+         addCondition(sample,p);
+         addTemp(sample,p);
+         addFeelsLike(sample,p);
+         addUpdateButton(p);
       }
       catch(Exception e){
          current = new JSONObject();
@@ -49,7 +49,7 @@ public class CurrentPanel extends JPanel
    public CurrentPanel() throws Exception
    {
       sample = new Font("Serif", Font.PLAIN, 20);
-      update(sample);
+      update(sample,this);
       Thread.sleep(5000);
    }
    /************************************************************* 
@@ -136,7 +136,7 @@ public class CurrentPanel extends JPanel
    **************************************************************/
    public void addUpdateButton(JPanel p) throws Exception{
       updateButton = new JButton("Update");
-      updateButton.addActionListener(new UpdateListener());
+      updateButton.addActionListener(new UpdateListener(p));
       p.add(updateButton);
    }
    /************************************************************* 
@@ -186,23 +186,30 @@ public class CurrentPanel extends JPanel
    /*****************************************************************
    * The UpdateListener is a private class of CurrentPanel that 
    * implements the ActionListener interface. It is responsible for
-   * handling the response to the update button being pressed.
+   * handling the response to the update button being pressed. It
+   * knows the Panel which will be updated.
    *
    * Kiran Ganeshan
    ****************************************************************/
    private class UpdateListener implements ActionListener
    {
+      JPanel location;
       /************************************************************* 
       * Responds to any presses of the update button by updating
       * the CurrentPanel
       * 
-      * @param e  The ActionEvent to which the UpdateListener is
-      *           responding
+      * @param p  The Panel to update (CurrentPanel will be passed)
       **************************************************************/
-
+      public UpdateListener(JPanel p){location=p;}
+      /************************************************************* 
+      * Responds to any presses of the update button by updating
+      * the CurrentPanel
+      * 
+      * @param e  The ActionEvent to which UpdateListener responds
+      **************************************************************/
       public void actionPerformed(ActionEvent e)
       {
-         try{update(sample);}
+         try{update(sample,location);}
          catch(Exception a){System.out.println(a);}
       }
    }
