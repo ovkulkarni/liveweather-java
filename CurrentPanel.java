@@ -58,9 +58,7 @@ public class CurrentPanel extends JPanel
    * @param p  A Panel to which to add the label
    **************************************************************/
    public void addImage(JPanel p) throws Exception{
-      URL url = new URL(Weather.getImageURL(current));
-      BufferedImage image = ImageIO.read(url);
-      JLabel label = new JLabel(new ImageIcon(image));
+      JLabel label = Weather.getImageFromURL(Weather.getImageURL(current));
       p.add(label);
    }
    /************************************************************* 
