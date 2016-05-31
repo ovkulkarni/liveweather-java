@@ -54,12 +54,10 @@ public class CurrentPanel extends JPanel
    }
    /************************************************************* 
    * Adds an image depicting the current conditions to CurrentPanel.
-   **************************************************************/
-   public void addImage() throws Exception{
-      URL url = new URL(Weather.getImageURL(current));
-      BufferedImage image = ImageIO.read(url);
-      JLabel label = new JLabel(new ImageIcon(image));
-      add(label);
+   **************************************************************/g
+   public void addImage(JPanel p) throws Exception{
+      JLabel label = Weather.getImageFromURL(Weather.getImageURL(current));
+      p.add(label);
    }
    /************************************************************* 
    * Adds a label showing the time and date to CurrentPanel.

@@ -1,6 +1,9 @@
 import java.net.*;
 import java.io.*;
 import org.json.*;
+import java.awt.image.*;
+import javax.imageio.ImageIO;
+import javax.swing.*;
 
 public class Weather{
 
@@ -49,7 +52,43 @@ public class Weather{
    public static JSONObject getCurrentResults(String query) throws Exception{
       return getJSONFromURL("http://api.wunderground.com/api/ccb47836f398476f/conditions" + getEnding(query) + ".json");
    }
-
+   
+   public static JSONObject getForecastResults(String query) throws Exception{
+      return getJSONFromURL("http://api.wunderground.com/api/ccb47836f398476f/forecast10day" + getEnding(query) + ".json");
+   }
+   
+   public static JSONArray getForecastArray(String query) throws Exception{
+      return getForecastResults(query).getJSONObject("forecast").getJSONObject("simple_forecast").getJSONArray("forecastday");
+   }
+   
+   public static JSONObject getDayByNum(int n, JSONArray days) throws Exception{
+      return days.getJSONObject(n);
+   }
+   
+   public static String getForecastDate(JSONObject data) throws Exception{
+      return data.getJSONObject("date").getString("weekday");
+   }
+   
+   public static URL getForecastImageURL(JSONObject data) throws Exception{
+      URL url = new URL(data.getString("icon_url"));
+      return url;
+   }
+   
+   public static String getForecastTemps(JSONObject data) throws Exception{
+      String str = "High: ";
+      str += data.getJSONObject("high").getString("fahrenheit");
+      str += "F\nLow: ";
+      str += data.getJSONObject("low").getString("fahrenheit");
+      str += "F";
+      return str;
+   }
+   
+   public static JLabel getImageFromURL(URL url) throws Exception{
+      BufferedImage image = ImageIO.read(url);
+      JLabel label = new JLabel(new ImageIcon(image));
+      return label;
+   }
+   
    public static JSONObject getCurrentConditions(String query) throws Exception{
       return getCurrentResults(query).getJSONObject("current_observation");
    }
@@ -58,8 +97,9 @@ public class Weather{
       return data.getString("temperature_string");
    }
 
-   public static String getImageURL(JSONObject data){
-      return data.getString("icon_url");
+   public static URL getImageURL(JSONObject data) throws Exception{
+      URL url = new URL(data.getString("icon_url"));
+      return url;
    }
 
    public static String getFullName(JSONObject data){
