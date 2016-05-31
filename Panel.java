@@ -27,21 +27,26 @@ public class Panel extends JPanel
    **************************************************************/
    public Panel()
    {
-      setLayout(new BorderLayout());
-      current = new CurrentPanel();
-      current.setBorder(getOurBorder());
-      add(current, BorderLayout.NORTH);
-      JPanel right = new JPanel();
-      day = new DayPanel();
-      alerts = new AlertsPanel();
-      search = new SearchPanel();
-      right.setLayout(new GridLayout(3,1));
-      right.add(search);
-      right.add(day);
-      right.add(alerts);
-      add(right, BorderLayout.EAST);
-      tenDay = new TenDayPanel();
-      add(tenDay,BorderLayout.SOUTH);
+      try{
+         setLayout(new BorderLayout());
+         current = new CurrentPanel();
+         current.setBorder(getOurBorder());
+         add(current, BorderLayout.NORTH);
+         JPanel right = new JPanel();
+         day = new DayPanel();
+         alerts = new AlertsPanel();
+         search = new SearchPanel();
+         right.setLayout(new GridLayout(3,1));
+         right.add(search);
+         right.add(day);
+         right.add(alerts);
+         //add(right, BorderLayout.EAST);
+         tenDay = new TenDayPanel();
+         add(tenDay,BorderLayout.EAST);
+      }
+      catch(Exception e){
+         System.out.println(e);
+      }
    }
    /************************************************************* 
    * Returns the standardized border used for each subpanel of

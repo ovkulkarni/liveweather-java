@@ -58,7 +58,7 @@ public class Weather{
    }
    
    public static JSONArray getForecastArray(String query) throws Exception{
-      return getForecastResults(query).getJSONObject("forecast").getJSONObject("simple_forecast").getJSONArray("forecastday");
+      return getForecastResults(query).getJSONObject("forecast").getJSONObject("simpleforecast").getJSONArray("forecastday");
    }
    
    public static JSONObject getDayByNum(int n, JSONArray days) throws Exception{

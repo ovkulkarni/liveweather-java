@@ -31,7 +31,7 @@ public class CurrentPanel extends JPanel
          current = Weather.getCurrentConditions("Washington");
          setLayout(new GridLayout(6, 0));
          addLocation(sample);
-         addImage();
+         //addImage();
          addDate(sample);
          addCondition(sample);
          addTemp(sample);
@@ -54,7 +54,7 @@ public class CurrentPanel extends JPanel
    }
    /************************************************************* 
    * Adds an image depicting the current conditions to CurrentPanel.
-   **************************************************************/g
+   **************************************************************/
    public void addImage(JPanel p) throws Exception{
       JLabel label = Weather.getImageFromURL(Weather.getImageURL(current));
       p.add(label);

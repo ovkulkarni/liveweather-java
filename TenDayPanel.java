@@ -29,7 +29,7 @@ public class TenDayPanel extends JPanel
    public TenDayPanel()
    {
       for(int x=0;x<10;x++)
-         dayPanels[x] = new SingleDayPanel();
+         dayPanels[x] = new SingleDayPanel(x);
       for(int x=0;x<10;x++)
          add(dayPanels[x]);
    }
