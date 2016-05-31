@@ -26,17 +26,17 @@ public class CurrentPanel extends JPanel
    * Instantiates the JSONObject required to retain information
    * from the Wunderground API
    **************************************************************/
-   public void update(Font sample) throws Exception{
+   public void update(Font sample,JPanel p) throws Exception{
       try{
          current = Weather.getCurrentConditions("Washington");
-         setLayout(new GridLayout(6, 0));
-         addLocation(sample);
-         addImage();
-         addDate(sample);
-         addCondition(sample);
-         addTemp(sample);
-         addFeelsLike(sample);
-         addUpdateButton();
+         p.setLayout(new GridLayout(7, 0));
+         addLocation(sample,p);
+         addImage(p);
+         addDate(sample,p);
+         addCondition(sample,p);
+         addTemp(sample,p);
+         addFeelsLike(sample,p);
+         addUpdateButton(p);
       }
       catch(Exception e){
          current = new JSONObject();
@@ -49,12 +49,14 @@ public class CurrentPanel extends JPanel
    public CurrentPanel() throws Exception
    {
       sample = new Font("Serif", Font.PLAIN, 20);
-      update(sample);
+      update(sample,this);
       Thread.sleep(5000);
    }
    /************************************************************* 
    * Adds an image depicting the current conditions to CurrentPanel.
-   **************************************************************/g
+   *
+   * @param p  A Panel to which to add the label
+   **************************************************************/
    public void addImage(JPanel p) throws Exception{
       JLabel label = Weather.getImageFromURL(Weather.getImageURL(current));
       p.add(label);
@@ -63,8 +65,9 @@ public class CurrentPanel extends JPanel
    * Adds a label showing the time and date to CurrentPanel.
    * 
    * @param f  A font with which to display the label
+   * @param p  A Panel to which to add the label
    **************************************************************/
-   public void addDate(Font f) throws Exception{
+   public void addDate(Font f, JPanel p) throws Exception{
       JLabel label = new JLabel(Weather.getTimeAndDate(current));
       String unformat = label.getText();
       String wd = formatWeekday(unformat.substring(0,3));
@@ -74,61 +77,67 @@ public class CurrentPanel extends JPanel
       String finalText = wd + ", " + date;
       label.setText(finalText);
       label.setFont(f);
-      add(label);
+      p.add(label);
    }
    /************************************************************* 
    * Adds a label showing a description of the current conditions
    * to CurrentPanel.
    * 
    * @param f  A font with which to display the label
+   * @param p  A Panel to which to add the label
    **************************************************************/
-   public void addCondition(Font f) throws Exception{
+   public void addCondition(Font f,JPanel p) throws Exception{
       JLabel label = new JLabel(Weather.getCondition(current));
       label.setFont(f);
-      add(label);
+      p.add(label);
    }
    /************************************************************* 
    * Adds a label showing the current temperature to CurrentPanel.
    * 
    * @param f  A font with which to display the label
+   * @param p  A Panel to which to add the label
    **************************************************************/
-   public void addTemp(Font f) throws Exception{
+   public void addTemp(Font f,JPanel p) throws Exception{
       String temp = Weather.getTemperature(current);
       temp = temp.substring(0,temp.indexOf("("));
       JLabel label = new JLabel("Temperature: " + temp);
       label.setFont(f);
-      add(label);
+      p.add(label);
    }
    /************************************************************* 
    * Adds a label showing the "feels like" temperature to CurrentPanel.
    * 
    * @param f  A font with which to display the label
+   * @param p  A Panel to which to add the label
    **************************************************************/
-   public void addFeelsLike(Font f) throws Exception{
+   public void addFeelsLike(Font f, JPanel p) throws Exception{
       String temp = Weather.getActualTemp(current);
       temp = temp.substring(0,temp.indexOf("("));
       JLabel label = new JLabel("Feels like: " + temp);
       label.setFont(f);
-      add(label);
+      p.add(label);
    }
    /************************************************************* 
    * Adds a label showing the location from which the Wunderground
    * API is showing weather to CurrentPanel
    * 
    * @param f  A font with which to display the label
+   * @param p  A Panel to which to add the label
    **************************************************************/
-   public void addLocation(Font f) throws Exception{
+   public void addLocation(Font f, JPanel p) throws Exception{
       JLabel label = new JLabel(Weather.getFullName(current));
       label.setFont(f);
-      add(label);
+      p.add(label);
    }
    /************************************************************* 
    * Adds the update button to the CurrentPanel
+   *
+   * @param p  A Panel to which to add the label
    **************************************************************/
-   public void addUpdateButton() throws Exception{
+   public void addUpdateButton(JPanel p) throws Exception{
       updateButton = new JButton("Update");
-      updateButton.addActionListener(new UpdateListener());
-      add(updateButton);
+      updateButton.addActionListener(new UpdateListener(p));
+      p.add(updateButton);
    }
    /************************************************************* 
    * Formats the weekday text received form Wunderground API
@@ -177,23 +186,30 @@ public class CurrentPanel extends JPanel
    /*****************************************************************
    * The UpdateListener is a private class of CurrentPanel that 
    * implements the ActionListener interface. It is responsible for
-   * handling the response to the update button being pressed.
+   * handling the response to the update button being pressed. It
+   * knows the Panel which will be updated.
    *
    * Kiran Ganeshan
    ****************************************************************/
    private class UpdateListener implements ActionListener
    {
+      JPanel location;
       /************************************************************* 
       * Responds to any presses of the update button by updating
       * the CurrentPanel
       * 
-      * @param e  The ActionEvent to which the UpdateListener is
-      *           responding
+      * @param p  The Panel to update (CurrentPanel will be passed)
       **************************************************************/
-
+      public UpdateListener(JPanel p){location=p;}
+      /************************************************************* 
+      * Responds to any presses of the update button by updating
+      * the CurrentPanel
+      * 
+      * @param e  The ActionEvent to which UpdateListener responds
+      **************************************************************/
       public void actionPerformed(ActionEvent e)
       {
-         try{update(sample);}
+         try{update(sample,location);}
          catch(Exception a){System.out.println(a);}
       }
    }

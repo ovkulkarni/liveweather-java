@@ -25,7 +25,7 @@ public class Panel extends JPanel
    /************************************************************* 
    * Constructs a Panel
    **************************************************************/
-   public Panel()
+   public Panel() throws Exception
    {
       setLayout(new BorderLayout());
       current = new CurrentPanel();
