@@ -29,13 +29,12 @@ public class CurrentPanel extends JPanel
    public void update(Font sample) throws Exception{
       try{
          current = Weather.getCurrentConditions("Washington");
-         setLayout(new GridLayout(6, 0));
          addLocation(sample);
-         //addImage();
+         addImage();
          addDate(sample);
          addCondition(sample);
-         addTemp(sample);
-         addFeelsLike(sample);
+         addTemps(sample);
+         //addFeelsLike(sample);
          addUpdateButton();
       }
       catch(Exception e){
@@ -49,15 +48,15 @@ public class CurrentPanel extends JPanel
    public CurrentPanel() throws Exception
    {
       sample = new Font("Serif", Font.PLAIN, 20);
+      setLayout(new GridLayout(6, 0));
       update(sample);
-      Thread.sleep(5000);
    }
    /************************************************************* 
    * Adds an image depicting the current conditions to CurrentPanel.
    **************************************************************/
-   public void addImage(JPanel p) throws Exception{
+   public void addImage() throws Exception{
       JLabel label = Weather.getImageFromURL(Weather.getImageURL(current));
-      p.add(label);
+      add(label);
    }
    /************************************************************* 
    * Adds a label showing the time and date to CurrentPanel.
@@ -65,7 +64,7 @@ public class CurrentPanel extends JPanel
    * @param f  A font with which to display the label
    **************************************************************/
    public void addDate(Font f) throws Exception{
-      JLabel label = new JLabel(Weather.getTimeAndDate(current));
+      JLabel label = new JLabel(Weather.getTimeAndDate(current), SwingConstants.CENTER);
       String unformat = label.getText();
       String wd = formatWeekday(unformat.substring(0,3));
       String date = formatDate(unformat.substring(5,16));
@@ -83,7 +82,7 @@ public class CurrentPanel extends JPanel
    * @param f  A font with which to display the label
    **************************************************************/
    public void addCondition(Font f) throws Exception{
-      JLabel label = new JLabel(Weather.getCondition(current));
+      JLabel label = new JLabel(Weather.getCondition(current), SwingConstants.CENTER);
       label.setFont(f);
       add(label);
    }
@@ -92,10 +91,17 @@ public class CurrentPanel extends JPanel
    * 
    * @param f  A font with which to display the label
    **************************************************************/
-   public void addTemp(Font f) throws Exception{
+   public void addTemps(Font f) throws Exception{
       String temp = Weather.getTemperature(current);
       temp = temp.substring(0,temp.indexOf("("));
-      JLabel label = new JLabel("Temperature: " + temp);
+      String str = "<html>Temperature: ";
+      str += temp;
+      str += "<br>";
+      String actual = Weather.getActualTemp(current);
+      str += "Feels like: ";
+      str += actual;
+      str += "</html>";
+      JLabel label = new JLabel(str, SwingConstants.CENTER);
       label.setFont(f);
       add(label);
    }
@@ -107,7 +113,7 @@ public class CurrentPanel extends JPanel
    public void addFeelsLike(Font f) throws Exception{
       String temp = Weather.getActualTemp(current);
       temp = temp.substring(0,temp.indexOf("("));
-      JLabel label = new JLabel("Feels like: " + temp);
+      JLabel label = new JLabel("Feels like: " + temp, SwingConstants.CENTER);
       label.setFont(f);
       add(label);
    }
@@ -118,7 +124,7 @@ public class CurrentPanel extends JPanel
    * @param f  A font with which to display the label
    **************************************************************/
    public void addLocation(Font f) throws Exception{
-      JLabel label = new JLabel(Weather.getFullName(current));
+      JLabel label = new JLabel(Weather.getFullName(current), SwingConstants.CENTER);
       label.setFont(f);
       add(label);
    }

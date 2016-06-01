@@ -12,6 +12,8 @@ import java.awt.*;
 import javax.imageio.ImageIO;
 import org.json.*;
 import java.net.*;
+import javax.swing.border.*;
+
 public class SingleDayPanel extends JPanel {
    private static JSONObject daydata;
    /************************************************************* 
@@ -20,7 +22,8 @@ public class SingleDayPanel extends JPanel {
    **************************************************************/
    public void update(JPanel p, int day) throws Exception{
       try{
-         JSONArray dayarr = Weather.getForecastArray("Washington");
+         p.setBorder(new EmptyBorder(10, 10, 10, 10));
+	 JSONArray dayarr = Weather.getForecastArray("Washington");
          daydata = Weather.getDayByNum(day, dayarr);
          p.setLayout(new GridLayout(3, 0));
          addImage(p);

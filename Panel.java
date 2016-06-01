@@ -42,7 +42,7 @@ public class Panel extends JPanel
          right.add(alerts);
          //add(right, BorderLayout.EAST);
          tenDay = new TenDayPanel();
-         add(tenDay,BorderLayout.EAST);
+         add(tenDay, BorderLayout.WEST);
       }
       catch(Exception e){
          System.out.println(e);

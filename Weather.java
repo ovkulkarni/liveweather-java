@@ -75,11 +75,11 @@ public class Weather{
    }
    
    public static String getForecastTemps(JSONObject data) throws Exception{
-      String str = "High: ";
+      String str = "<html>High: ";
       str += data.getJSONObject("high").getString("fahrenheit");
-      str += "F\nLow: ";
+      str += "F<br>Low: ";
       str += data.getJSONObject("low").getString("fahrenheit");
-      str += "F";
+      str += "F</html>";
       return str;
    }
    
