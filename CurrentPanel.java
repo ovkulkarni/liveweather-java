@@ -28,13 +28,12 @@ public class CurrentPanel extends JPanel
    **************************************************************/
    public void update(Font sample) throws Exception{
       try{
-         current = Weather.getCurrentConditions("Washington");
+         current = Weather.getCurrentConditions(Weather.getGeolookup());
          addLocation(sample);
          addImage();
          addDate(sample);
          addCondition(sample);
          addTemps(sample);
-         //addFeelsLike(sample);
          addUpdateButton();
       }
       catch(Exception e){
@@ -68,7 +67,6 @@ public class CurrentPanel extends JPanel
       String unformat = label.getText();
       String wd = formatWeekday(unformat.substring(0,3));
       String date = formatDate(unformat.substring(5,16));
-      //unformat = unformat.substring(16,unformat.length());
       
       String finalText = wd + ", " + date;
       label.setText(finalText);
@@ -99,7 +97,7 @@ public class CurrentPanel extends JPanel
       str += "<br>";
       String actual = Weather.getActualTemp(current);
       str += "Feels like: ";
-      str += actual;
+      str += actual.substring(0, actual.indexOf("("));
       str += "</html>";
       JLabel label = new JLabel(str, SwingConstants.CENTER);
       label.setFont(f);

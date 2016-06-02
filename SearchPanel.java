@@ -15,14 +15,10 @@ import javax.imageio.ImageIO;
 import org.json.*;
 import java.net.*;
 public class SearchPanel extends JPanel{
-   private static JSONObject searchIndex;
-   /************************************************************* 
-   * Instantiates the JSONObject required to retain information
-   * from the Wunderground API
-   **************************************************************/
-   static{}
    /************************************************************* 
    * Instantiates the CurrentPanel object
    **************************************************************/
-  public SearchPanel(){}
+  public SearchPanel(){
+      
+  }
 }

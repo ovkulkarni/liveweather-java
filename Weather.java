@@ -53,6 +53,10 @@ public class Weather{
       return getJSONFromURL("http://api.wunderground.com/api/ccb47836f398476f/conditions" + getEnding(query) + ".json");
    }
    
+   public static String getGeolookup() throws Exception{
+      return getJSONFromURL("http://api.wunderground.com/api/ccb47836f398476f/geolookup/q/autoip.json").getJSONObject("location").getString("city");
+   }
+   
    public static JSONObject getForecastResults(String query) throws Exception{
       return getJSONFromURL("http://api.wunderground.com/api/ccb47836f398476f/forecast10day" + getEnding(query) + ".json");
    }
