@@ -29,7 +29,7 @@ public class Panel extends JPanel
    {
       try{
          setLayout(new BorderLayout());
-         current = new CurrentPanel();
+         current = new CurrentPanel(Weather.getGeolookup());
          current.setBorder(getOurBorder());
          add(current, BorderLayout.NORTH);
          JPanel right = new JPanel();
