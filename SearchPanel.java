@@ -19,6 +19,9 @@ public class SearchPanel extends JPanel{
    * Instantiates the SearchPanel object
    **************************************************************/
    public SearchPanel(JTextField search){
-      
+      setPreferredSize(new Dimension(955,50));
+      search = new JTextField();
+      add(search);
+      setBackground(Color.WHITE);
    }
 }

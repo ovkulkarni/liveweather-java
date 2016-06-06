@@ -36,18 +36,19 @@ public class Panel extends JPanel
          setLayout(new BorderLayout());
          current = new CurrentPanel(Weather.getGeolookup());
          current.setBorder(getOurBorder(currentBorderNums));
-         add(current, BorderLayout.NORTH);
+         add(current, BorderLayout.CENTER);
          JPanel right = new JPanel();
          day = new DayPanel();
          alerts = new AlertsPanel();
          search = new SearchPanel(searchbox);
+         add(search, BorderLayout.NORTH);
          right.setLayout(new GridLayout(3,1));
          right.add(search);
          right.add(day);
          //right.add(alerts);
          //add(right, BorderLayout.EAST);
          tenDay = new TenDayPanel(new EmptyBorder(5,7,5,7),getOurBorder(singleDayBorderNums));
-         add(tenDay, BorderLayout.CENTER);
+         add(tenDay, BorderLayout.SOUTH);
          t.start();
       }
       catch(Exception e){

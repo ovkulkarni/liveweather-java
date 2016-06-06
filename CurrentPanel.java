@@ -21,7 +21,6 @@ public class CurrentPanel extends JPanel
 { 
    private Font sample;
    private static JSONObject current;
-   private JButton updateButton;
    private String location;
    /************************************************************* 
    * Instantiates the JSONObject required to retain information
@@ -35,7 +34,6 @@ public class CurrentPanel extends JPanel
          addDate(sample);
          addCondition(sample);
          addTemps(sample);
-         addUpdateButton();
       }
       catch(Exception e){
          current = new JSONObject();
@@ -127,14 +125,6 @@ public class CurrentPanel extends JPanel
       JLabel label = new JLabel(Weather.getFullName(current), SwingConstants.CENTER);
       label.setFont(f);
       add(label);
-   }
-   /************************************************************* 
-   * Adds the update button to the CurrentPanel
-   **************************************************************/
-   public void addUpdateButton() throws Exception{
-      updateButton = new JButton("Update");
-      updateButton.addActionListener(new UpdateListener());
-      add(updateButton);
    }
    /************************************************************* 
    * Formats the weekday text received form Wunderground API
