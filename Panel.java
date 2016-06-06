@@ -23,6 +23,7 @@ public class Panel extends JPanel
    private TenDayPanel tenDay;
    private DayPanel day;
    private SearchPanel search;
+   private JTextField searchbox;
    int delay = 30000;
    /************************************************************* 
    * Constructs a Panel
@@ -32,12 +33,12 @@ public class Panel extends JPanel
       try{
          setLayout(new BorderLayout());
          current = new CurrentPanel(Weather.getGeolookup());
-         current.setBorder(new CompoundBorder(new EmptyBorder(20,20,20,20),getOurBorder()));
+         current.setBorder(new CompoundBorder(new EmptyBorder(10,10,10,10),getOurBorder()));
          add(current, BorderLayout.NORTH);
          JPanel right = new JPanel();
          day = new DayPanel();
          alerts = new AlertsPanel();
-         search = new SearchPanel();
+         search = new SearchPanel(searchbox);
          right.setLayout(new GridLayout(3,1));
          right.add(search);
          right.add(day);

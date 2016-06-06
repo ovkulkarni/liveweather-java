@@ -16,9 +16,9 @@ import org.json.*;
 import java.net.*;
 public class SearchPanel extends JPanel{
    /************************************************************* 
-   * Instantiates the CurrentPanel object
+   * Instantiates the SearchPanel object
    **************************************************************/
-  public SearchPanel(){
+   public SearchPanel(JTextField search){
       
-  }
+   }
 }
