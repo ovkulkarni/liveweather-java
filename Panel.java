@@ -24,6 +24,8 @@ public class Panel extends JPanel
    private DayPanel day;
    private SearchPanel search;
    private JTextField searchbox;
+   private int[] currentBorderNums = {10,10,10,10,10,10,5,10};
+   private int[] singleDayBorderNums = {5,2,5,2,2,2,2,2};
    int delay = 30000;
    /************************************************************* 
    * Constructs a Panel
@@ -33,7 +35,7 @@ public class Panel extends JPanel
       try{
          setLayout(new BorderLayout());
          current = new CurrentPanel(Weather.getGeolookup());
-         current.setBorder(new CompoundBorder(new EmptyBorder(10,10,10,10),getOurBorder()));
+         current.setBorder(getOurBorder(currentBorderNums));
          add(current, BorderLayout.NORTH);
          JPanel right = new JPanel();
          day = new DayPanel();
@@ -44,8 +46,8 @@ public class Panel extends JPanel
          right.add(day);
          //right.add(alerts);
          //add(right, BorderLayout.EAST);
-         tenDay = new TenDayPanel(getOurBorder());
-         add(tenDay, BorderLayout.WEST);
+         tenDay = new TenDayPanel(new EmptyBorder(5,7,5,7),getOurBorder(singleDayBorderNums));
+         add(tenDay, BorderLayout.CENTER);
          t.start();
       }
       catch(Exception e){
@@ -57,16 +59,32 @@ public class Panel extends JPanel
    * the Panel
    * @return  border
    **************************************************************/
-   public Border getOurBorder(){
-      return new CompoundBorder(BorderFactory.createMatteBorder(5,1,1,1,new Color(128,128,255)),new EmptyBorder(10,10,10,10));
+   public Border getOurBorder(int[] width){
+      Border innerBorder = new EmptyBorder(width[0]-4,width[1],width[2],width[3]);
+      Border outerBorder = new EmptyBorder(width[4],width[5],width[6],width[7]);
+      Border ourBorder = BorderFactory.createMatteBorder(5,1,1,1,new Color(128,128,255));
+      Border b = new CompoundBorder(ourBorder,innerBorder);
+      return new CompoundBorder(outerBorder,b);
    }
-   ActionListener taskPerformer = new ActionListener() {
-         public void actionPerformed(ActionEvent evt) {
-            current.repaint();
-            alerts.repaint();
-            tenDay.repaint();
-            System.out.println("Repainted.");
-         }
-      };
+   private class SearchListener extends KeyAdapter {
+      private JTextField searchBox;
+      public SearchListener(JTextField search){searchBox = search;}
+      public void keyPressed(KeyEvent e){
+         if(e.getKeyCode()==KeyEvent.VK_ENTER){update(searchBox.getText());}
+      }
+   }
+   ActionListener taskPerformer = new ActionListener() {public void actionPerformed(ActionEvent evt) {update();}};
    Timer t = new Timer(delay, taskPerformer);
+   public void update(){
+      current.repaint();
+      alerts.repaint();
+      tenDay.repaint();
+      System.out.println("Repainted.");
+   }
+   public void update(String newLoc){
+      //current.repaint();
+      //alerts.repaint();
+      //tenDay.repaint();
+      System.out.println("Repainted.");
+   }
 }

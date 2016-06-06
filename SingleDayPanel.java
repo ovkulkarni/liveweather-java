@@ -22,12 +22,12 @@ public class SingleDayPanel extends JPanel {
    public void update(JPanel p, int day, Border b) throws Exception{
       try{
          p.setBorder(b);
-         p.setPreferredSize(new Dimension(89,160));
+         p.setPreferredSize(new Dimension(89,155));
 	      JSONArray dayarr = Weather.getForecastArray("Washington");
          daydata = Weather.getDayByNum(day, dayarr);
          p.setLayout(new GridLayout(3, 0));
-         addImage(p);
          addDate(p);
+         addImage(p);
          addTemp(p);
       }
       catch(Exception e){

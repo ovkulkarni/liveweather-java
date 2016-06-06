@@ -12,9 +12,9 @@ public class Driver {
    **************************************************************/
    public static void main(String[] args) throws Exception{
       JFrame frame = new JFrame("Live Weather");
-      frame.setSize(952, 750);
+      frame.setSize(955, 750);
       frame.setLocation(50,50);
-      frame.setResizable(false);
+      //frame.setResizable(false);
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       frame.getContentPane().add(new Panel());
       frame.setVisible(true);

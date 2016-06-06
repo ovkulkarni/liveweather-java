@@ -27,10 +27,12 @@ public class TenDayPanel extends JPanel
    /************************************************************* 
    * Instantiates a TenDayPanel object
    **************************************************************/
-   public TenDayPanel(Border b)
+   public TenDayPanel(Border tenPanelBorder, Border singlePanelBorder)
    {
+      setBorder(tenPanelBorder);
+      setLayout(new GridLayout(1,10));
       for(int x=0;x<10;x++)
-         dayPanels[x] = new SingleDayPanel(x,b);
+         dayPanels[x] = new SingleDayPanel(x,singlePanelBorder);
       for(int x=0;x<10;x++)
          add(dayPanels[x]);
    }
