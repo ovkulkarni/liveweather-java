@@ -11,6 +11,7 @@
 import javax.swing.*;
 import java.awt.image.*;
 import java.awt.*;
+import java.awt.event.*;
 import javax.imageio.ImageIO;
 import org.json.*;
 import java.net.*;
@@ -22,6 +23,7 @@ public class Panel extends JPanel
    private TenDayPanel tenDay;
    private DayPanel day;
    private SearchPanel search;
+   int delay = 30000;
    /************************************************************* 
    * Constructs a Panel
    **************************************************************/
@@ -43,6 +45,7 @@ public class Panel extends JPanel
          //add(right, BorderLayout.EAST);
          tenDay = new TenDayPanel();
          add(tenDay, BorderLayout.WEST);
+         t.start();
       }
       catch(Exception e){
          System.out.println(e);
@@ -56,4 +59,13 @@ public class Panel extends JPanel
    public Border getOurBorder(){
       return BorderFactory.createMatteBorder(5,1,1,1,new Color(128,128,255));
    }
+   ActionListener taskPerformer = new ActionListener() {
+         public void actionPerformed(ActionEvent evt) {
+            current.repaint();
+            alerts.repaint();
+            tenDay.repaint();
+            System.out.println("Repainted.");
+         }
+      };
+   Timer t = new Timer(delay, taskPerformer);
 }
