@@ -13,17 +13,17 @@ import javax.imageio.ImageIO;
 import org.json.*;
 import java.net.*;
 import javax.swing.border.*;
-
 public class SingleDayPanel extends JPanel {
    private static JSONObject daydata;
    /************************************************************* 
    * Instantiates the JSONObject required to retain information
    * from the Wunderground API
    **************************************************************/
-   public void update(JPanel p, int day) throws Exception{
+   public void update(JPanel p, int day, Border b) throws Exception{
       try{
-         p.setBorder(new EmptyBorder(10, 10, 10, 10));
-	 JSONArray dayarr = Weather.getForecastArray("Washington");
+         p.setBorder(b);
+         p.setPreferredSize(new Dimension(89,160));
+	      JSONArray dayarr = Weather.getForecastArray("Washington");
          daydata = Weather.getDayByNum(day, dayarr);
          p.setLayout(new GridLayout(3, 0));
          addImage(p);
@@ -38,9 +38,9 @@ public class SingleDayPanel extends JPanel {
    /************************************************************* 
    * Instantiates the SingleDayPanel object
    **************************************************************/
-   public SingleDayPanel(int day){
+   public SingleDayPanel(int day, Border b){
       try{
-         update(this, day);
+         update(this, day,b);
       }
       catch(Exception e){
          JLabel label = new JLabel("Things are borkened.");
@@ -54,12 +54,12 @@ public class SingleDayPanel extends JPanel {
    }
    
    public void addDate(JPanel p) throws Exception{
-      JLabel label = new JLabel(Weather.getForecastDate(daydata));
+      JLabel label = new JLabel(Weather.getForecastDate(daydata),SwingConstants.CENTER);
       p.add(label);
    }
    
    public void addTemp(JPanel p) throws Exception{
-      JLabel label = new JLabel(Weather.getForecastTemps(daydata));
+      JLabel label = new JLabel(Weather.getForecastTemps(daydata),SwingConstants.CENTER);
       p.add(label);
    }
 }

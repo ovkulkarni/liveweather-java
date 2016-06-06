@@ -4,6 +4,7 @@ import java.awt.*;
 import javax.imageio.ImageIO;
 import org.json.*;
 import java.net.*;
+import javax.swing.border.*;
 /*****************************************************************
 * The TenDayPanel is a JPanel that displays the most basic weather
 * information for the next ten days. TenDayPanel has a JSONObject
@@ -26,10 +27,10 @@ public class TenDayPanel extends JPanel
    /************************************************************* 
    * Instantiates a TenDayPanel object
    **************************************************************/
-   public TenDayPanel()
+   public TenDayPanel(Border b)
    {
       for(int x=0;x<10;x++)
-         dayPanels[x] = new SingleDayPanel(x);
+         dayPanels[x] = new SingleDayPanel(x,b);
       for(int x=0;x<10;x++)
          add(dayPanels[x]);
    }

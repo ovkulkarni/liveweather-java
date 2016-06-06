@@ -32,7 +32,7 @@ public class Panel extends JPanel
       try{
          setLayout(new BorderLayout());
          current = new CurrentPanel(Weather.getGeolookup());
-         current.setBorder(getOurBorder());
+         current.setBorder(new CompoundBorder(new EmptyBorder(20,20,20,20),getOurBorder()));
          add(current, BorderLayout.NORTH);
          JPanel right = new JPanel();
          day = new DayPanel();
@@ -41,9 +41,9 @@ public class Panel extends JPanel
          right.setLayout(new GridLayout(3,1));
          right.add(search);
          right.add(day);
-         right.add(alerts);
+         //right.add(alerts);
          //add(right, BorderLayout.EAST);
-         tenDay = new TenDayPanel();
+         tenDay = new TenDayPanel(getOurBorder());
          add(tenDay, BorderLayout.WEST);
          t.start();
       }
@@ -57,7 +57,7 @@ public class Panel extends JPanel
    * @return  border
    **************************************************************/
    public Border getOurBorder(){
-      return BorderFactory.createMatteBorder(5,1,1,1,new Color(128,128,255));
+      return new CompoundBorder(BorderFactory.createMatteBorder(5,1,1,1,new Color(128,128,255)),new EmptyBorder(10,10,10,10));
    }
    ActionListener taskPerformer = new ActionListener() {
          public void actionPerformed(ActionEvent evt) {
