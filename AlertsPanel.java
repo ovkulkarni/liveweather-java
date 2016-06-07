@@ -21,17 +21,13 @@ public class AlertsPanel extends JPanel {
    * Instantiates the JSONObject required to retain information
    * from the Wunderground API
    **************************************************************/
-   public void update(Border b, String location) throws Exception{
+   public void update(String location) throws Exception{
       try{
          JSONArray alertarr = Weather.getAlertsArray(location);
          Font alertFont = new Font("Sans Serif", Font.BOLD, 20);
          if(alertarr.length() == 0){
             label = new JTextArea("No Alerts at this time.");
             label.setWrapStyleWord(true);
-            label.setOpaque(true);
-            label.setBackground(Color.RED);
-            label.setForeground(Color.YELLOW);
-            label.setFont(alertFont);
             add(label);
          }
          else{
@@ -56,7 +52,8 @@ public class AlertsPanel extends JPanel {
    **************************************************************/
    public AlertsPanel(Border b, String location){
       try{
-         update(b, location);
+         setBorder(b);
+         update(location);
       }
       catch(Exception e){
          JLabel label = new JLabel("Things are borkened.");

@@ -27,6 +27,9 @@ public class Panel extends JPanel
    private int[] currentBorderNums = {10,10,10,10,10,10,5,10};
    private int[] singleDayBorderNums = {5,2,5,2,2,2,2,2};
    private int[] hourBorderNums = {5,2,5,2,2,2,2,2};
+   private int[] alertBorderNums = {10,10,10,10,5,10,10,10};
+   private int[] tenDayBorderNums = {5,7,5,7};
+   private int[] dayBorderNums = {5,7,5,7};
    int delay = 300000;
    /************************************************************* 
    * Constructs a Panel
@@ -36,18 +39,26 @@ public class Panel extends JPanel
       try{
          searchbox = new JTextField(25);
          setLayout(new BorderLayout());
+         JPanel top = new JPanel();
+         top.setLayout(new GridLayout(1,2));
+         JLabel logo = new JLabel(new ImageIcon("images/logo.png"));
+         top.add(logo);
          current = new CurrentPanel(Weather.location);
-         current.setBorder(getOurBorder(currentBorderNums));
-         add(current, BorderLayout.CENTER);
-         alerts = new AlertsPanel(getOurBorder(hourBorderNums), Weather.location);
+         current.setBorder(getOurBorder(currentBorderNums,"Current Conditions"));
+         current.setMinimumSize(new Dimension(450,400));
+         top.add(current);
+         add(top, BorderLayout.CENTER);
+         alerts = new AlertsPanel(getOurBorder(alertBorderNums,"Alerts"), Weather.location);
          search = new SearchPanel(searchbox);
          searchbox.addKeyListener(new SearchListener());
          add(search, BorderLayout.NORTH);
          JPanel south = new JPanel();
          south.setLayout(new GridLayout(3,1));
-         tenDay = new TenDayPanel(new EmptyBorder(5,7,5,7),getOurBorder(singleDayBorderNums));
+         Border tenDayBorder = getTitledEmptyBorder(tenDayBorderNums,"Ten Day Forecast");
+         tenDay = new TenDayPanel(tenDayBorder,getOurBorder(singleDayBorderNums));
          south.add(tenDay);
-         day = new DayPanel(new EmptyBorder(5,7,5,7),getOurBorder(hourBorderNums));
+         Border dayBorder = getTitledEmptyBorder(dayBorderNums,"Hourly Forecast");
+         day = new DayPanel(dayBorder,getOurBorder(hourBorderNums));
          south.add(day);
          south.add(alerts);
          add(south,BorderLayout.SOUTH);
@@ -70,8 +81,24 @@ public class Panel extends JPanel
       Border b = new CompoundBorder(ourBorder,innerBorder);
       return new CompoundBorder(outerBorder,b);
    }
-   
-   
+   public Font getTitleFont(){return new Font("Sans-Serif",Font.PLAIN,30);}
+   public Border getOurBorder(int[] width,String titleString){
+      Border innerBorder = new EmptyBorder(width[0]-4,width[1],width[2],width[3]);
+      Border outerBorder = new EmptyBorder(width[4],width[5],width[6],width[7]);
+      Border ourBorder = BorderFactory.createMatteBorder(5,1,1,1,new Color(128,128,255));
+      Border empty = BorderFactory.createEmptyBorder();
+      TitledBorder title = new TitledBorder(empty, titleString,TitledBorder.CENTER,TitledBorder.CENTER,getTitleFont());
+      title.setTitleJustification(TitledBorder.CENTER);
+      Border b = new CompoundBorder(ourBorder,innerBorder);
+      b = new CompoundBorder(title,b);
+      return new CompoundBorder(outerBorder,b);
+   }
+   public Border getTitledEmptyBorder(int[] width,String titleString){
+      Border border = new EmptyBorder(width[0],width[1],width[2],width[3]);
+      Border empty = BorderFactory.createEmptyBorder();
+      TitledBorder title = new TitledBorder(empty, titleString,TitledBorder.CENTER,TitledBorder.CENTER,getTitleFont());
+      return new CompoundBorder(border,title);
+   }
    private class SearchListener extends KeyAdapter {
       public void keyPressed(KeyEvent e) {
       int key = e.getKeyCode();
@@ -107,7 +134,7 @@ public class Panel extends JPanel
          day.revalidate();
          day.repaint();
          alerts.removeAll();
-         alerts.update(getOurBorder(hourBorderNums), Weather.location);
+         alerts.update(Weather.location);
          alerts.revalidate();
          alerts.repaint();
          Weather.loggerWrite("Repainted.");
