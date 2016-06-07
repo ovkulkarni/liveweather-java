@@ -34,7 +34,6 @@ public class CurrentPanel extends JPanel
          addDate(sample);
          addCondition(sample);
          addTemps(sample);
-         addUpdateButton();
          Weather.loggerWrite("Updated CurrentPanel.");
       }
       catch(Exception e){
