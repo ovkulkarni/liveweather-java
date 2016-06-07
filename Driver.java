@@ -12,8 +12,8 @@ public class Driver {
    **************************************************************/
    public static void main(String[] args) throws Exception{
       JFrame frame = new JFrame("Live Weather");
-      frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-      frame.setLocation(50,50);
+      frame.setSize(955, 700);
+      frame.setLocation(0,0);
       frame.setResizable(true);
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       frame.getContentPane().add(new Panel());
