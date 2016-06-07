@@ -34,7 +34,7 @@ public class Panel extends JPanel
    {
       try{
          setLayout(new BorderLayout());
-         current = new CurrentPanel(Weather.getGeolookup());
+         current = new CurrentPanel(Weather.location);
          current.setBorder(getOurBorder(currentBorderNums));
          add(current, BorderLayout.CENTER);
          JPanel right = new JPanel();
@@ -52,7 +52,8 @@ public class Panel extends JPanel
          t.start();
       }
       catch(Exception e){
-         System.out.println(e);
+         Weather.loggerWrite("FATAL ERROR: " + e);
+         System.exit(1);
       }
    }
    /************************************************************* 
@@ -74,18 +75,21 @@ public class Panel extends JPanel
          if(e.getKeyCode()==KeyEvent.VK_ENTER){update(searchBox.getText());}
       }
    }
-   ActionListener taskPerformer = new ActionListener() {public void actionPerformed(ActionEvent evt) {update();}};
+   ActionListener taskPerformer = 
+      new ActionListener() {
+         public void actionPerformed(ActionEvent evt) {
+            try{
+               Font f = new Font("Serif", Font.PLAIN, 20);
+               current.removeAll();
+               current.update(f, Weather.location);
+               current.revalidate();
+               current.repaint();
+               Weather.loggerWrite("Repainted.");
+            }
+            catch(Exception e){
+               Weather.loggerWrite("Error when updating CurrentPanel: " + e);
+            }
+         }
+      };
    Timer t = new Timer(delay, taskPerformer);
-   public void update(){
-      current.repaint();
-      alerts.repaint();
-      tenDay.repaint();
-      System.out.println("Repainted.");
-   }
-   public void update(String newLoc){
-      //current.repaint();
-      //alerts.repaint();
-      //tenDay.repaint();
-      System.out.println("Repainted.");
-   }
 }

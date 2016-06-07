@@ -19,11 +19,11 @@ public class SingleDayPanel extends JPanel {
    * Instantiates the JSONObject required to retain information
    * from the Wunderground API
    **************************************************************/
-   public void update(JPanel p, int day, Border b) throws Exception{
+   public void update(JPanel p, int day, Border b, String location) throws Exception{
       try{
          p.setBorder(b);
          p.setPreferredSize(new Dimension(89,155));
-	      JSONArray dayarr = Weather.getForecastArray("Washington");
+         JSONArray dayarr = Weather.getForecastArray(location);
          daydata = Weather.getDayByNum(day, dayarr);
          p.setLayout(new GridLayout(3, 0));
          addDate(p);
@@ -38,9 +38,9 @@ public class SingleDayPanel extends JPanel {
    /************************************************************* 
    * Instantiates the SingleDayPanel object
    **************************************************************/
-   public SingleDayPanel(int day, Border b){
+   public SingleDayPanel(int day, Border b, String location){
       try{
-         update(this, day,b);
+         update(this, day,b, location);
       }
       catch(Exception e){
          JLabel label = new JLabel("Things are borkened.");
