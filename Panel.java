@@ -91,7 +91,7 @@ public class Panel extends JPanel
          current.revalidate();
          current.repaint();
          tenDay.removeAll();
-         tenDay.update(new EmptyBorder(5,7,5,7),getOurBorder(singleDayBorderNums));
+         tenDay.update(getOurBorder(singleDayBorderNums));
          tenDay.revalidate();
          tenDay.repaint();
          Weather.loggerWrite("Repainted.");
