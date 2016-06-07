@@ -77,6 +77,27 @@ public class Weather{
       return getJSONFromURL("http://api.wunderground.com/api/ccb47836f398476f/conditions" + getEnding(query) + ".json");
    }
    
+   public static JSONArray getHourlyArray(String query) throws Exception{
+      return getJSONFromURL("http://api.wunderground.com/api/ccb47836f398476f/hourly" + getEnding(query) + ".json").getJSONArray("hourly_forecast");
+   }
+   
+   public static JSONObject getHourObject(int n, JSONArray hourlyArray){
+      return hourlyArray.getJSONObject(n);
+   }
+   
+   public static URL getHourImageURL(JSONObject data) throws Exception{
+      URL url = new URL(data.getString("icon_url"));
+      return url;
+   }
+   
+   public static String getHourTemp(JSONObject data){
+      return data.getJSONObject("temp").getString("english") + " F";
+   }
+   
+   public static String getHour(JSONObject data){
+      return data.getJSONObject("FCTTIME").getString("civil");
+   }
+   
    public static String getGeolookup() throws Exception{
       loggerWrite("Geolocating...");
       JSONObject data = getJSONFromURL("http://api.wunderground.com/api/ccb47836f398476f/geolookup/q/autoip.json").getJSONObject("location");
