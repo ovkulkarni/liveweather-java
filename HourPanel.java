@@ -14,24 +14,24 @@ import org.json.*;
 import java.net.*;
 import javax.swing.border.*;
 public class HourPanel extends JPanel {
-   private static JSONObject daydata;
+   private static JSONObject hourdata;
    /************************************************************* 
    * Instantiates the JSONObject required to retain information
    * from the Wunderground API
    **************************************************************/
-   public void update(JPanel p, int day, Border b, String location) throws Exception{
+   public void update(JPanel p, int hour, Border b, String location) throws Exception{
       try{
          p.setBorder(b);
          p.setPreferredSize(new Dimension(89,155));
-         JSONArray dayarr = Weather.getForecastArray(location);
-         daydata = Weather.getDayByNum(day, dayarr);
+         JSONArray hourarr = Weather.getHourlyArray(location);
+         hourdata = Weather.getHourObject(hour, hourarr);
          p.setLayout(new GridLayout(3, 0));
-         addDate(p);
+         addHour(p);
          addImage(p);
          addTemp(p);
       }
       catch(Exception e){
-         daydata = new JSONObject();
+         hourdata = new JSONObject();
          Weather.loggerWrite("ERROR: " + e);
       }
    }
@@ -50,17 +50,17 @@ public class HourPanel extends JPanel {
    }
    
    public void addImage(JPanel p) throws Exception{
-      JLabel label = Weather.getImageFromURL(Weather.getForecastImageURL(daydata));
+      JLabel label = Weather.getImageFromURL(Weather.getHourImageURL(hourdata));
       p.add(label);
    }
    
-   public void addDate(JPanel p) throws Exception{
-      JLabel label = new JLabel(Weather.getForecastDate(daydata),SwingConstants.CENTER);
+   public void addHour(JPanel p) throws Exception{
+      JLabel label = new JLabel(Weather.getHour(hourdata),SwingConstants.CENTER);
       p.add(label);
    }
    
    public void addTemp(JPanel p) throws Exception{
-      JLabel label = new JLabel(Weather.getForecastTemps(daydata),SwingConstants.CENTER);
+      JLabel label = new JLabel(Weather.getHourTemp(hourdata),SwingConstants.CENTER);
       p.add(label);
    }
 }

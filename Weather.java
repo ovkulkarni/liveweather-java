@@ -91,7 +91,7 @@ public class Weather{
    }
    
    public static String getHourTemp(JSONObject data){
-      return data.getJSONObject("temp").getString("english") + " F";
+      return data.getJSONObject("temp").getString("english") + "F";
    }
    
    public static String getHour(JSONObject data){
