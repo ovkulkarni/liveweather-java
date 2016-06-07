@@ -21,10 +21,12 @@ public class Panel extends JPanel
    private CurrentPanel current;
    private AlertsPanel alerts;
    private TenDayPanel tenDay;
+   private DayPanel day;
    private SearchPanel search;
    private JTextField searchbox;
    private int[] currentBorderNums = {10,10,10,10,10,10,5,10};
    private int[] singleDayBorderNums = {5,2,5,2,2,2,2,2};
+   private int[] hourBorderNums = {5,2,5,2,2,2,2,2};
    int delay = 30000;
    /************************************************************* 
    * Constructs a Panel
@@ -41,8 +43,13 @@ public class Panel extends JPanel
          search = new SearchPanel(searchbox);
          searchbox.addKeyListener(new SearchListener());
          add(search, BorderLayout.NORTH);
+         JPanel south = new JPanel();
+         south.setLayout(new GridLayout(2,1));
          tenDay = new TenDayPanel(new EmptyBorder(5,7,5,7),getOurBorder(singleDayBorderNums));
-         add(tenDay, BorderLayout.SOUTH);
+         south.add(tenDay);
+         day = new DayPanel(new EmptyBorder(5,7,5,7),getOurBorder(hourBorderNums));
+         south.add(day);
+         add(south,BorderLayout.SOUTH);
          t.start();
       }
       catch(Exception e){
