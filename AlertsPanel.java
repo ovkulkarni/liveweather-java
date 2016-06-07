@@ -13,13 +13,27 @@ import javax.imageio.ImageIO;
 import org.json.*;
 import java.net.*;
 import javax.swing.border.*;
+/*****************************************************************
+* The AlertsPanel is a JPanel that displays information about any
+* weather alerts pertinent to the selected area, such as tropcial
+* storm or hurricane warnings. The AlertsPanel knows about the 
+* hourly and alerts data retrieved from the Wunderground API, and
+* uses a JTextArea to display that information. The AlertsPanel
+* knows how to update and instantiate itself.
+*
+* Omkar Kulkarni
+****************************************************************/
 public class AlertsPanel extends JPanel {
    private static JSONObject hourdata;
    private static JSONObject alertdata;
    private static JTextArea label;
    /************************************************************* 
-   * Instantiates the JSONObject required to retain information
-   * from the Wunderground API
+   * Updates the AlertsPanel based on current information about
+   * alerts in the given location available from the Wunderground
+   * API, and pushes that information to a JTextArea that is
+   * displayed to the user on the screen.
+   *
+   * @param location The location from which data will be retrieved
    **************************************************************/
    public void update(String location) throws Exception{
       try{
@@ -48,7 +62,11 @@ public class AlertsPanel extends JPanel {
       }
    }
    /************************************************************* 
-   * Instantiates the HourPanel object
+   * Instantiates the AlertsPanel object with a given Border
+   * and with information about a given location.
+   *
+   * @param b        The border around the AlertsPanel
+   * @param location The location of the alerts
    **************************************************************/
    public AlertsPanel(Border b, String location){
       try{

@@ -20,7 +20,11 @@ public class TenDayPanel extends JPanel
    private static JSONObject tenDay;
    SingleDayPanel[] dayPanels = new SingleDayPanel[10];
    /************************************************************* 
-   * Instantiates a TenDayPanel object
+   * Instantiates a TenDayPanel object using a border to put
+   * around it and around it's constituent SingleDayPanels
+   *
+   * @param tenPanelBorder    border to put around tenPanel
+   * @param singlePanelBorder border to put around singlePanels
    **************************************************************/
    public TenDayPanel(Border tenPanelBorder, Border singlePanelBorder)
    {
@@ -28,6 +32,11 @@ public class TenDayPanel extends JPanel
       setLayout(new GridLayout(1,10));
       update(singlePanelBorder);
    }
+   /************************************************************* 
+   * Updates the information contained within the SinglePanels
+   *
+   * @param singlePanelBorder border to put around singlePanels
+   **************************************************************/
    public void update(Border singlePanelBorder){
       for(int x=0;x<10;x++)
          dayPanels[x] = new SingleDayPanel(x, singlePanelBorder, Weather.location);

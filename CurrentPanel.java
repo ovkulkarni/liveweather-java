@@ -1,15 +1,3 @@
-/*****************************************************************
-* The CurrentPanel is CurrentPanel that displays basic weather
-* information, such as time and current condition. CurrentPanel
-* has a JSONObject current, and it knows how to instantiate
-* that JSONObject with information retreived from the Wunderground 
-* API. It also knows how to instantiate itself, and how to add
-* an Image depicting the current condition, a date, a condition
-* description, a temperature, and a location to any Panel (in this
-* case, "this" will be passed to each of these methods.)
-*
-* Kiran Ganeshan
-****************************************************************/
 import javax.swing.*;
 import java.awt.image.*;
 import java.awt.*;
@@ -17,13 +5,30 @@ import javax.imageio.ImageIO;
 import org.json.*;
 import java.net.*;
 import java.awt.event.*;
+/*****************************************************************
+* The CurrentPanel is JPanel that displays basic weather
+* information, such as time and current condition. CurrentPanel
+* has a JSONObject current, and it knows how to instantiate
+* that JSONObject with information retreived from the Wunderground 
+* API. The CurrentPanel knows how to update and instantiate itself.
+* It also knows how to instantiate itself, and how to add
+* an Image depicting the current condition, a date, a condition
+* description, a temperature, and a location to any Panel.
+*
+* Kiran Ganeshan
+****************************************************************/
 public class CurrentPanel extends JPanel
 { 
    private Font sample;
    private static JSONObject current;
    /************************************************************* 
    * Instantiates the JSONObject required to retain information
-   * from the Wunderground API
+   * from the Wunderground API with a given location and updates
+   * the information on the Panel using the information
+   * from the WUnderground API.
+   *
+   * @param sample   The font used to display information
+   * @param location The location to display information about
    **************************************************************/
    public void update(Font sample, String location) throws Exception{
       try{
@@ -45,7 +50,10 @@ public class CurrentPanel extends JPanel
       }
    }
    /************************************************************* 
-   * Instantiates the CurrentPanel object
+   * Instantiates the CurrentPanel object using a location
+   * that is geolocated in Panel/Weather
+   *
+   * @param loc   The location to display information about
    **************************************************************/
    public CurrentPanel(String loc) throws Exception
    {

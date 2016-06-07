@@ -1,13 +1,3 @@
-/*****************************************************************
-* The Panel is the class that determines and encapsulates what 
-* the user sees when he/she runs the program. The Panel is a
-* JPanel and has a CurrentPanel, an AlertsPanel, a TenDayPanel,
-* a DayPanel, and a SearchPanel. The Panel knows how to
-* construct itself and how to retrieve the Border object that 
-* is used as a border between subpanels.
-*
-* Kiran Ganeshan
-****************************************************************/
 import javax.swing.*;
 import java.awt.image.*;
 import java.awt.*;
@@ -16,6 +6,17 @@ import javax.imageio.ImageIO;
 import org.json.*;
 import java.net.*;
 import javax.swing.border.*;
+/*****************************************************************
+* The Panel is the class that determines and encapsulates what 
+* the user sees when he/she runs the program. The Panel is a
+* JPanel and has a CurrentPanel, an AlertsPanel, a TenDayPanel,
+* a DayPanel, and a SearchPanel. The Panel knows how to
+* construct itself and how to retrieve the Border object that 
+* is used as a border between subpanels, as well as several other
+* Border objects.
+*
+* Kiran Ganeshan
+****************************************************************/
 public class Panel extends JPanel
 {
    private CurrentPanel current;
@@ -32,7 +33,10 @@ public class Panel extends JPanel
    private int[] dayBorderNums = {5,7,5,7};
    int delay = 300000;
    /************************************************************* 
-   * Constructs a Panel
+   * Constructs the main Panel of the program by synthesizing
+   * use of methods in other Panels, such as DayPanel or
+   * CurrentPanel. Determines the overall look and feel of the
+   * program.
    **************************************************************/
    public Panel()
    {
@@ -81,8 +85,11 @@ public class Panel extends JPanel
    }
    /************************************************************* 
    * Returns the standardized border used for each subpanel of
-   * the Panel
-   * @return  border
+   * the Panel, with padding on the inside and outside as
+   * determined using the array of integers passed to it
+   *
+   * @param   width     Eight integers that represent padding values
+   * @return  [unnamed] The border object to be added to a Panel
    **************************************************************/
    public Border getOurBorder(int[] width){
       Border innerBorder = new EmptyBorder(width[0]-4,width[1],width[2],width[3]);
@@ -91,7 +98,22 @@ public class Panel extends JPanel
       Border b = new CompoundBorder(ourBorder,innerBorder);
       return new CompoundBorder(outerBorder,b);
    }
+   /************************************************************* 
+   * Returns the title font used when writing titles
+   *
+   * @return  [unnamed] The font object used when writing titles
+   **************************************************************/
    public Font getTitleFont(){return new Font("Sans-Serif",Font.PLAIN,30);}
+   /************************************************************* 
+   * Returns the standardized border used for each subpanel of
+   * the Panel, with padding on the inside and outside as
+   * determined using the array of integers passed to it, and a
+   * title determined by the string passed
+   *
+   * @param   width        Eight integers that represent padding values
+   * @param   titleString  The string used as the title of the Panel
+   * @return  [unnamed]    The border object to be added to a Panel
+   **************************************************************/
    public Border getOurBorder(int[] width,String titleString){
       Border innerBorder = new EmptyBorder(width[0]-4,width[1],width[2],width[3]);
       Border outerBorder = new EmptyBorder(width[4],width[5],width[6],width[7]);
@@ -103,24 +125,50 @@ public class Panel extends JPanel
       b = new CompoundBorder(title,b);
       return new CompoundBorder(outerBorder,b);
    }
+   /************************************************************* 
+   * Returns an empty border, with padding on the inside and outside as
+   * determined using the array of integers passed to it, and a
+   * title determined by the string passed
+   *
+   * @param   width        Eight integers that represent padding values
+   * @param   titleString  The string used as the title of the Panel
+   * @return  [unnamed]    The border object to be added to a Panel
+   **************************************************************/
    public Border getTitledEmptyBorder(int[] width,String titleString){
       Border border = new EmptyBorder(width[0],width[1],width[2],width[3]);
       Border empty = BorderFactory.createEmptyBorder();
       TitledBorder title = new TitledBorder(empty, titleString,TitledBorder.CENTER,TitledBorder.CENTER,getTitleFont());
       return new CompoundBorder(border,title);
    }
+   /*****************************************************************
+   * The SearchListener is responsible for calling the update function
+   * when the enter button on the keyboard is pressed, indicating that
+   * there is a city name in the search bar that the user wants to
+   * see weather information about
+   *
+   * Omkar Kulkarni
+   ****************************************************************/
    private class SearchListener extends KeyAdapter {
+      /************************************************************* 
+      * Updates the Panel when the enter button is pressed.
+      *
+      * @param e  The KeyEvent associated with the press of a key
+      **************************************************************/
       public void keyPressed(KeyEvent e) {
-      int key = e.getKeyCode();
-      if (key == KeyEvent.VK_ENTER) {
-        Weather.loggerWrite("Got new value from search box: "  + searchbox.getText());
-        Weather.location = searchbox.getText();
-        update();
-        }
-     }
+         int key = e.getKeyCode();
+         if (key == KeyEvent.VK_ENTER) {
+            Weather.loggerWrite("Got new value from search box: "  + searchbox.getText());
+            Weather.location = searchbox.getText();
+            update();
+         }
+      }
    }
-   
-   
+   /*****************************************************************
+   * The ActionListener taskPerformer and Timer t are responsible
+   * for updating the Panel every [delay] milliseconds.
+   *
+   * Omkar Kulkarni
+   ****************************************************************/
    ActionListener taskPerformer = 
       new ActionListener() {
          public void actionPerformed(ActionEvent evt) {
@@ -128,6 +176,10 @@ public class Panel extends JPanel
          }
       };
    Timer t = new Timer(delay, taskPerformer);
+   /************************************************************* 
+   * Updates the Panel when the enter button is pressed or every
+   * time the Timer and ActionListener indicate to do so.
+   **************************************************************/
    public void update(){
       try{
          Font f = new Font("Sans Serif", Font.PLAIN, 20);
