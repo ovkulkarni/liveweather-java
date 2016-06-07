@@ -32,12 +32,14 @@ public class Panel extends JPanel
    public Panel()
    {
       try{
+         searchbox = new JTextField(25);
          setLayout(new BorderLayout());
          current = new CurrentPanel(Weather.location);
          current.setBorder(getOurBorder(currentBorderNums));
          add(current, BorderLayout.CENTER);
          alerts = new AlertsPanel();
          search = new SearchPanel(searchbox);
+         searchbox.addKeyListener(new SearchListener());
          add(search, BorderLayout.NORTH);
          tenDay = new TenDayPanel(new EmptyBorder(5,7,5,7),getOurBorder(singleDayBorderNums));
          add(tenDay, BorderLayout.SOUTH);
@@ -60,28 +62,43 @@ public class Panel extends JPanel
       Border b = new CompoundBorder(ourBorder,innerBorder);
       return new CompoundBorder(outerBorder,b);
    }
+   
+   
    private class SearchListener extends KeyAdapter {
-      private JTextField searchBox;
-      public SearchListener(JTextField search){searchBox = search;}
-      public void keyPressed(KeyEvent e){
-         if(e.getKeyCode()==KeyEvent.VK_ENTER){update(searchBox.getText());}
-      }
+      public void keyPressed(KeyEvent e) {
+      int key = e.getKeyCode();
+      if (key == KeyEvent.VK_ENTER) {
+        Weather.loggerWrite("Got new value from search box: "  + searchbox.getText());
+        Weather.location = searchbox.getText();
+        update();
+        }
+     }
    }
+   
+   
    ActionListener taskPerformer = 
       new ActionListener() {
          public void actionPerformed(ActionEvent evt) {
-            try{
-               Font f = new Font("Serif", Font.PLAIN, 20);
-               current.removeAll();
-               current.update(f, Weather.location);
-               current.revalidate();
-               current.repaint();
-               Weather.loggerWrite("Repainted.");
-            }
-            catch(Exception e){
-               Weather.loggerWrite("Error when updating CurrentPanel: " + e);
-            }
+         update();
          }
       };
    Timer t = new Timer(delay, taskPerformer);
+   public void update(){
+      try{
+         Font f = new Font("Sans Serif", Font.PLAIN, 20);
+         current.removeAll();
+         current.update(f, Weather.location);
+         current.revalidate();
+         current.repaint();
+         tenDay.removeAll();
+         tenDay.update(new EmptyBorder(5,7,5,7),getOurBorder(singleDayBorderNums));
+         tenDay.revalidate();
+         tenDay.repaint();
+         Weather.loggerWrite("Repainted.");
+      }
+      catch(Exception e){
+         Weather.loggerWrite("Error when updating CurrentPanel: " + e);
+      }
+   }
+
 }

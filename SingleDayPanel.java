@@ -32,7 +32,7 @@ public class SingleDayPanel extends JPanel {
       }
       catch(Exception e){
          daydata = new JSONObject();
-         System.out.println(e);
+         Weather.loggerWrite("ERROR: " + e);
       }
    }
    /************************************************************* 
@@ -45,6 +45,7 @@ public class SingleDayPanel extends JPanel {
       catch(Exception e){
          JLabel label = new JLabel("Things are borkened.");
          add(label);
+         Weather.loggerWrite("ERROR: " + e);
       }
    }
    

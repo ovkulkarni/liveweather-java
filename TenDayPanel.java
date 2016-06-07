@@ -20,19 +20,17 @@ public class TenDayPanel extends JPanel
    private static JSONObject tenDay;
    SingleDayPanel[] dayPanels = new SingleDayPanel[10];
    /************************************************************* 
-   * Instantiates the JSONObject required to retain information
-   * from the Wunderground API
-   **************************************************************/
-   static{}
-   /************************************************************* 
    * Instantiates a TenDayPanel object
    **************************************************************/
    public TenDayPanel(Border tenPanelBorder, Border singlePanelBorder)
    {
       setBorder(tenPanelBorder);
       setLayout(new GridLayout(1,10));
+      update(tenPanelBorder, singlePanelBorder);
+   }
+   public void update(Border tenPanelBorder, Border singlePanelBorder){
       for(int x=0;x<10;x++)
-         dayPanels[x] = new SingleDayPanel(x,singlePanelBorder, Weather.location);
+         dayPanels[x] = new SingleDayPanel(x, singlePanelBorder, Weather.location);
       for(int x=0;x<10;x++)
          add(dayPanels[x]);
    }

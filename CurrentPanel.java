@@ -47,7 +47,7 @@ public class CurrentPanel extends JPanel
    public CurrentPanel(String loc) throws Exception
    {
       Weather.loggerWrite("Instantiating CurrentPanel");
-      sample = new Font("Serif", Font.PLAIN, 20);
+      sample = new Font("Sans Serif", Font.PLAIN, 20);
       setLayout(new GridLayout(6, 0));
       Weather.loggerWrite("Set Layout as GridLayout");
       Weather.location = loc;

@@ -12,11 +12,17 @@ public class Driver {
    **************************************************************/
    public static void main(String[] args) throws Exception{
       JFrame frame = new JFrame("Live Weather");
-      frame.setSize(955, 750);
+      frame.setSize(955, 650);
       frame.setLocation(50,50);
-      //frame.setResizable(false);
+      frame.setResizable(false);
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       frame.getContentPane().add(new Panel());
       frame.setVisible(true);
+      Runtime.getRuntime().addShutdownHook(
+         new Thread() {            
+            public void run() {                
+               Weather.loggerWrite("Exiting Application...");            
+            }       
+         }); 
    }
 }
