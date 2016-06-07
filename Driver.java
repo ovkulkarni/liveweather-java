@@ -14,7 +14,7 @@ public class Driver {
       JFrame frame = new JFrame("Live Weather");
       frame.setSize(955, 700);
       frame.setLocation(0,0);
-      frame.setResizable(true);
+      frame.setResizable(false);
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       frame.getContentPane().add(new Panel());
       frame.setVisible(true);
