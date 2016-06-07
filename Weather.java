@@ -199,7 +199,7 @@ public class Weather{
    }
    
    public static String getAlertMessage(JSONObject data){
-      return data.getString("message");
+      return data.getString("description") + " until " + data.getString("expires");
    }
 
 }

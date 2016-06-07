@@ -27,7 +27,7 @@ public class Panel extends JPanel
    private int[] currentBorderNums = {10,10,10,10,10,10,5,10};
    private int[] singleDayBorderNums = {5,2,5,2,2,2,2,2};
    private int[] hourBorderNums = {5,2,5,2,2,2,2,2};
-   int delay = 30000;
+   int delay = 300000;
    /************************************************************* 
    * Constructs a Panel
    **************************************************************/
@@ -44,11 +44,12 @@ public class Panel extends JPanel
          searchbox.addKeyListener(new SearchListener());
          add(search, BorderLayout.NORTH);
          JPanel south = new JPanel();
-         south.setLayout(new GridLayout(2,1));
-         day = new DayPanel(new EmptyBorder(5,7,5,7),getOurBorder(hourBorderNums));
-         south.add(day);
+         south.setLayout(new GridLayout(3,1));
          tenDay = new TenDayPanel(new EmptyBorder(5,7,5,7),getOurBorder(singleDayBorderNums));
          south.add(tenDay);
+         day = new DayPanel(new EmptyBorder(5,7,5,7),getOurBorder(hourBorderNums));
+         south.add(day);
+         south.add(alerts);
          add(south,BorderLayout.SOUTH);
          t.start();
       }
@@ -105,6 +106,10 @@ public class Panel extends JPanel
          day.update(getOurBorder(hourBorderNums));
          day.revalidate();
          day.repaint();
+         alerts.removeAll();
+         alerts.update(getOurBorder(hourBorderNums), Weather.location);
+         alerts.revalidate();
+         alerts.repaint();
          Weather.loggerWrite("Repainted.");
       }
       catch(Exception e){

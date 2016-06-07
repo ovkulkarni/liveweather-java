@@ -16,7 +16,7 @@ import javax.swing.border.*;
 public class AlertsPanel extends JPanel {
    private static JSONObject hourdata;
    private static JSONObject alertdata;
-   private static JLabel label;
+   private static JTextArea label;
    /************************************************************* 
    * Instantiates the JSONObject required to retain information
    * from the Wunderground API
@@ -24,17 +24,27 @@ public class AlertsPanel extends JPanel {
    public void update(Border b, String location) throws Exception{
       try{
          JSONArray alertarr = Weather.getAlertsArray(location);
-         if(alertarr.length() == 0)
-            label = new JLabel("No Alerts at this time.");
+         Font alertFont = new Font("Sans Serif", Font.BOLD, 20);
+         if(alertarr.length() == 0){
+            label = new JTextArea("No Alerts at this time.");
+            label.setWrapStyleWord(true);
+            label.setOpaque(true);
             label.setBackground(Color.RED);
             label.setForeground(Color.YELLOW);
+            label.setFont(alertFont);
             add(label);
-         for(int i = 0; i < alertarr.length(); i++)
-            alertdata = Weather.getAlertObject(i, alertarr);
-            label = new JLabel(Weather.getAlertMessage(alertdata));
+         }
+         else{
+            for(int i = 0; i < alertarr.length(); i++)
+               alertdata = Weather.getAlertObject(i, alertarr);
+            label = new JTextArea(Weather.getAlertMessage(alertdata));
+            label.setWrapStyleWord(true);
+            label.setOpaque(true);
             label.setBackground(Color.RED);
             label.setForeground(Color.YELLOW);
-            add(label);
+            label.setFont(alertFont);
+            add(label);  
+         }
       }
       catch(Exception e){
          hourdata = new JSONObject();
