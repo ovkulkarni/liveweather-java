@@ -21,7 +21,6 @@ public class CurrentPanel extends JPanel
 { 
    private Font sample;
    private static JSONObject current;
-   private JButton updateButton;
    /************************************************************* 
    * Instantiates the JSONObject required to retain information
    * from the Wunderground API
@@ -37,8 +36,12 @@ public class CurrentPanel extends JPanel
          Weather.loggerWrite("Updated CurrentPanel.");
       }
       catch(Exception e){
-         current = new JSONObject();
-         System.out.println(e);
+         current = null;
+         Font errorFont = new Font("Sans Serif", Font.BOLD, 30);
+         JLabel errorLabel = new JLabel("There was an error retrieving data for " + Weather.location, SwingConstants.CENTER);
+         errorLabel.setFont(errorFont);
+         add(errorLabel);
+         Weather.loggerWrite("ERROR: " + e);
       }
    }
    /************************************************************* 
@@ -173,28 +176,5 @@ public class CurrentPanel extends JPanel
       date = date.substring(date.indexOf(" ")+1,date.length());
       String year = date;
       return month + " " + day + ", " + year;
-   }
-   /*****************************************************************
-   * The UpdateListener is a private class of CurrentPanel that 
-   * implements the ActionListener interface. It is responsible for
-   * handling the response to the update button being pressed.
-   *
-   * Kiran Ganeshan
-   ****************************************************************/
-   private class UpdateListener implements ActionListener
-   {
-      /************************************************************* 
-      * Responds to any presses of the update button by updating
-      * the CurrentPanel
-      * 
-      * @param e  The ActionEvent to which the UpdateListener is
-      *           responding
-      **************************************************************/
-
-      public void actionPerformed(ActionEvent e)
-      {
-         try{update(sample, Weather.location);}
-         catch(Exception a){System.out.println(a);}
-      }
    }
 }
