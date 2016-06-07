@@ -76,6 +76,7 @@ public class Panel extends JPanel
          south.add(day);
          south.add(alerts);
          add(south,BorderLayout.SOUTH);
+         Weather.loggerWrite("Initialized Panel.");
          t.start();
       }
       catch(Exception e){

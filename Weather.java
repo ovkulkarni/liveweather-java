@@ -59,7 +59,7 @@ public class Weather{
     */
     
    public static String getName(String query) throws Exception{
-      JSONObject results = getJSONFromURL("http://autocomplete.wunderground.com/aq?query=" + URLEncoder.encode(query) + "&h=0&c=US");
+      JSONObject results = getJSONFromURL("http://autocomplete.wunderground.com/aq?query=" + URLEncoder.encode(query, "UTF-8") + "&h=0&c=US");
       return results.getJSONArray("RESULTS").getJSONObject(0).getString("name");
    }
    /**
@@ -69,7 +69,7 @@ public class Weather{
     * @return       A String with the special code
     */
    public static String getEnding(String query) throws Exception {
-      JSONObject results = getJSONFromURL("http://autocomplete.wunderground.com/aq?query=" + URLEncoder.encode(query) + "&h=0&c=US");
+      JSONObject results = getJSONFromURL("http://autocomplete.wunderground.com/aq?query=" + URLEncoder.encode(query, "UTF-8") + "&h=0&c=US");
       return results.getJSONArray("RESULTS").getJSONObject(0).getString("l");
    }
 
