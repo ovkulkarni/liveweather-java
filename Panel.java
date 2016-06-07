@@ -101,6 +101,10 @@ public class Panel extends JPanel
          tenDay.update(getOurBorder(singleDayBorderNums));
          tenDay.revalidate();
          tenDay.repaint();
+         day.removeAll();
+         day.update(getOurBorder(hourBorderNums));
+         day.revalidate();
+         day.repaint();
          Weather.loggerWrite("Repainted.");
       }
       catch(Exception e){
