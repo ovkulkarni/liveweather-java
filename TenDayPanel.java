@@ -26,9 +26,9 @@ public class TenDayPanel extends JPanel
    {
       setBorder(tenPanelBorder);
       setLayout(new GridLayout(1,10));
-      update(tenPanelBorder, singlePanelBorder);
+      update(singlePanelBorder);
    }
-   public void update(Border tenPanelBorder, Border singlePanelBorder){
+   public void update(Border singlePanelBorder){
       for(int x=0;x<10;x++)
          dayPanels[x] = new SingleDayPanel(x, singlePanelBorder, Weather.location);
       for(int x=0;x<10;x++)

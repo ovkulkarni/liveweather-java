@@ -79,7 +79,7 @@ public class Panel extends JPanel
    ActionListener taskPerformer = 
       new ActionListener() {
          public void actionPerformed(ActionEvent evt) {
-         update();
+            update();
          }
       };
    Timer t = new Timer(delay, taskPerformer);

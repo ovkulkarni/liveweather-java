@@ -23,6 +23,7 @@ public class Driver {
             public void run() {                
                Weather.loggerWrite("Exiting Application...");            
             }       
-         }); 
+         }
+      ); 
    }
 }
