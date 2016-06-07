@@ -39,7 +39,7 @@ public class Panel extends JPanel
          current = new CurrentPanel(Weather.location);
          current.setBorder(getOurBorder(currentBorderNums));
          add(current, BorderLayout.CENTER);
-         alerts = new AlertsPanel();
+         alerts = new AlertsPanel(getOurBorder(hourBorderNums), Weather.location);
          search = new SearchPanel(searchbox);
          searchbox.addKeyListener(new SearchListener());
          add(search, BorderLayout.NORTH);
