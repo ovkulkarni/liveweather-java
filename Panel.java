@@ -45,10 +45,10 @@ public class Panel extends JPanel
          add(search, BorderLayout.NORTH);
          JPanel south = new JPanel();
          south.setLayout(new GridLayout(2,1));
-         tenDay = new TenDayPanel(new EmptyBorder(5,7,5,7),getOurBorder(singleDayBorderNums));
-         south.add(tenDay);
          day = new DayPanel(new EmptyBorder(5,7,5,7),getOurBorder(hourBorderNums));
          south.add(day);
+         tenDay = new TenDayPanel(new EmptyBorder(5,7,5,7),getOurBorder(singleDayBorderNums));
+         south.add(tenDay);
          add(south,BorderLayout.SOUTH);
          t.start();
       }
