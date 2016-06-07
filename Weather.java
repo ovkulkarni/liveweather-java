@@ -189,5 +189,17 @@ public class Weather{
       String dateTimeString = dateTimeFormat.format(dateTime);
       logfile.println(dateTimeString + ": " + s);
    }
+   
+   public static JSONArray getAlertsArray(String query) throws Exception{
+      return getJSONFromURL("http://api.wunderground.com/api/ccb47836f398476f/alerts" + getEnding(query) + ".json").getJSONArray("alerts");
+   }
+   
+   public static JSONObject getAlertObject(int n, JSONArray alertArray){
+      return alertArray.getJSONObject(n);
+   }
+   
+   public static String getAlertMessage(JSONObject data){
+      return data.getString("message");
+   }
 
 }
