@@ -1,30 +1,35 @@
-/*****************************************************************
-* The DayPanel is a JPanel that displays basic weather
-* information, such as time and current condition. CurrentPanel
-* has a JSONObject current, and it knows how to instantiate
-* that JSONObject with information retreived from the Wunderground 
-* API. It also knows how to instantiate itself, and how to add
-* an Image depicting the current condition, a date, a condition
-* description, a temperature, and a location to any Panel (in this
-* case, "this" will be passed to each of these methods.)
-*
-* Kiran Ganeshan
-****************************************************************/
 import javax.swing.*;
 import java.awt.image.*;
 import java.awt.*;
 import javax.imageio.ImageIO;
 import org.json.*;
 import java.net.*;
-public class DayPanel extends JPanel {
-  private static JSONObject current;
-  /************************************************************* 
-   * Instantiates the JSONObject required to retain information
-   * from the Wunderground API
+import javax.swing.border.*;
+/*****************************************************************
+* The DayPanel is a JPanel that displays the most basic weather
+* information for the next ten hours. DayPanel has a JSONObject
+* that it uses to retreive data from the Wunderground API, and
+* it also has an array of HourPanels, each of which display
+* one day of weather. The DayPanel knows how to instantiate
+* it's JSONObject and how to instantiate itself.
+*
+* Nikki Prabhu
+****************************************************************/
+public class DayPanel extends JPanel 
+{
+   private static JSONObject hourly;
+   HourPanel[] hourPanels = new HourPanel[10];
+   /************************************************************* 
+   * Instantiates a DayPanel object
+   *
+   * @param dayPanelBorder    The border that will go around DayPanel
+   * @param hourPanelBorder   The border that will surround HourPanels
    **************************************************************/
-  static{}
-  /************************************************************* 
-   * Instantiates the DayPanel object
+   public DayPanel(Border dayPanelBorder, Border hourPanelBorder){}
+   /************************************************************* 
+   * Updates the information on the DayPanel object
+   *
+   * @param hourPanelBorder   The border that will surround HourPanels
    **************************************************************/
-  public DayPanel(){}
+   public void update(Border hourPanelBorder){}
 }

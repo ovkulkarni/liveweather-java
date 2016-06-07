@@ -4,6 +4,7 @@ import java.awt.*;
 import javax.imageio.ImageIO;
 import org.json.*;
 import java.net.*;
+import javax.swing.border.*;
 /*****************************************************************
 * The TenDayPanel is a JPanel that displays the most basic weather
 * information for the next ten days. TenDayPanel has a JSONObject
@@ -19,12 +20,17 @@ public class TenDayPanel extends JPanel
    private static JSONObject tenDay;
    SingleDayPanel[] dayPanels = new SingleDayPanel[10];
    /************************************************************* 
-   * Instantiates the JSONObject required to retain information
-   * from the Wunderground API
+   * Instantiates a TenDayPanel object using a border to put
+   * around it and around it's constituent SingleDayPanels
+   *
+   * @param tenPanelBorder    border to put around tenPanel
+   * @param singlePanelBorder border to put around singlePanels
    **************************************************************/
-   static{}
+   public TenDayPanel(Border tenPanelBorder, Border singlePanelBorder){}
    /************************************************************* 
-   * Instantiates a TenDayPanel object
+   * Updates the information contained within the SinglePanels
+   *
+   * @param singlePanelBorder border to put around singlePanels
    **************************************************************/
-   public TenDayPanel(){}
+   public void update(Border singlePanelBorder){}
 }
