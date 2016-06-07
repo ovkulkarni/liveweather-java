@@ -11,7 +11,7 @@ public class Driver {
    * Runs the program
    **************************************************************/
    public static void main(String[] args) throws Exception{
-      JFrame frame = new JFrame("Live Weather Java");
+      JFrame frame = new JFrame("Live Weather by Wunderground");
       frame.setSize(955, 1100);
       frame.setLocation(0,0);
       frame.setResizable(false);
