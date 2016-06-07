@@ -14,13 +14,17 @@ import java.awt.*;
 import javax.imageio.ImageIO;
 import org.json.*;
 import java.net.*;
+import javax.swing.border.*;
 public class SearchPanel extends JPanel{
    /************************************************************* 
    * Instantiates the SearchPanel object
    **************************************************************/
    public SearchPanel(JTextField search){
+      add(new JLabel(new ImageIcon("images/search-icon.png")));
       setPreferredSize(new Dimension(955,50));
-      search = new JTextField();
+      search = new JTextField("",SwingConstants.LEFT);
+      search.setPreferredSize(new Dimension(905,40));
+      search.setFont(new Font("Sans-Serif",Font.PLAIN,30));
       add(search);
       setBackground(Color.WHITE);
    }

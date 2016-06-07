@@ -21,7 +21,6 @@ public class Panel extends JPanel
    private CurrentPanel current;
    private AlertsPanel alerts;
    private TenDayPanel tenDay;
-   private DayPanel day;
    private SearchPanel search;
    private JTextField searchbox;
    private int[] currentBorderNums = {10,10,10,10,10,10,5,10};
@@ -37,16 +36,9 @@ public class Panel extends JPanel
          current = new CurrentPanel(Weather.location);
          current.setBorder(getOurBorder(currentBorderNums));
          add(current, BorderLayout.CENTER);
-         JPanel right = new JPanel();
-         day = new DayPanel();
          alerts = new AlertsPanel();
          search = new SearchPanel(searchbox);
          add(search, BorderLayout.NORTH);
-         right.setLayout(new GridLayout(3,1));
-         right.add(search);
-         right.add(day);
-         //right.add(alerts);
-         //add(right, BorderLayout.EAST);
          tenDay = new TenDayPanel(new EmptyBorder(5,7,5,7),getOurBorder(singleDayBorderNums));
          add(tenDay, BorderLayout.SOUTH);
          t.start();
